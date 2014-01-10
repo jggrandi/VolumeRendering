@@ -13,9 +13,7 @@
 #define ZOOM_MAX (10.0)
 //#define DISABLE_DRAGGING
 
-#define AX 0
-#define BY -0.347025
-#define CZ 0.937856
+
 
 
 static void handleCgError() 
@@ -29,6 +27,28 @@ CGlutWindow::CGlutWindow(){};
 CGlutWindow::CGlutWindow(DATAINFO dInfo)
 {
 	m_datasetInfo = dInfo;
+	m_drawPlane   = false;
+	initializeAll();
+}
+
+CGlutWindow::CGlutWindow(DATAINFO dInfo, PLANE_EQ dPlane)
+{
+	m_datasetInfo = dInfo;
+	m_planeInfo   = dPlane;
+	m_drawPlane   = true;
+	initializeAll();
+}
+
+
+CGlutWindow::~CGlutWindow(void)
+{
+	if (NULL != m_pCameraArcball) delete m_pCameraArcball;
+	if (NULL != m_pLightArcball)  delete m_pLightArcball;
+}
+
+void CGlutWindow::initializeAll()
+{
+	
 	s_fragmentProfile = s_vertexProfile = CG_PROFILE_UNKNOWN;
 
 	m_pCameraArcball = new CArcBall();
@@ -61,14 +81,8 @@ CGlutWindow::CGlutWindow(DATAINFO dInfo)
 	initializeAppParameters();
 	initializeGL();
 	initializeCg();
-}
 
-CGlutWindow::~CGlutWindow(void)
-{
-	if (NULL != m_pCameraArcball) delete m_pCameraArcball;
-	if (NULL != m_pLightArcball)  delete m_pLightArcball;
 }
-
 
 void CGlutWindow::initializeCg() 
 {
@@ -132,53 +146,48 @@ void CGlutWindow::renderFrame() {
 	if(m_showAxis)
 		defaultAxis(3.0f,5.0f);	
 
-	float z0,z1,z2,z3;	
-	float x0,x1,x2,x3;
-	float y0,y1,y2,y3;
+	if(m_drawPlane)
+	{
+		float z0,z1,z2,z3;	
+		float x0,x1,x2,x3;
+		float y0,y1,y2,y3;
 
 
-	x0 = 1.0f; y0 = 1.0f; z0 = -(CZ*1.0f  + BY*1.0f )/AX;
-	x1 = 1.0f; y1 =-1.0f; z1 = -(CZ*1.0f  + BY*-1.0f)/AX;
-	x2 =-1.0f; y2 =-1.0f; z2 = -(CZ*-1.0f + BY*-1.0f)/AX;
-	x3 =-1.0f; y3 = 1.0f; z3 = -(CZ*-1.0f + BY*1.0f )/AX;
+		x0 = 1.0f; y0 = 1.0f; z0 = -(m_planeInfo.CZ*1.0f  + m_planeInfo.BY*1.0f )/m_planeInfo.AX;
+		x1 = 1.0f; y1 =-1.0f; z1 = -(m_planeInfo.CZ*1.0f  + m_planeInfo.BY*-1.0f)/m_planeInfo.AX;
+		x2 =-1.0f; y2 =-1.0f; z2 = -(m_planeInfo.CZ*-1.0f + m_planeInfo.BY*-1.0f)/m_planeInfo.AX;
+		x3 =-1.0f; y3 = 1.0f; z3 = -(m_planeInfo.CZ*-1.0f + m_planeInfo.BY*1.0f )/m_planeInfo.AX;
 
-	glEnable (GL_BLEND);
-	
-	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	
-	glColor4f(0.0f, 0.4f, 0.0f, 0.5f);
-	glBegin(GL_QUADS); 
+		glEnable (GL_BLEND);
 		
-		glVertex3f(x0, y0, z0);
-		glVertex3f(x1, y1, z1);
-		glVertex3f(x2, y2, z2);
-		glVertex3f(x3, y3, z3);
-	glEnd();
+		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		
+		glColor4f(0.0f, 0.4f, 0.0f, 0.5f);
+		glBegin(GL_QUADS); 
+			
+			glVertex3f(x0, y0, z0);
+			glVertex3f(x1, y1, z1);
+			glVertex3f(x2, y2, z2);
+			glVertex3f(x3, y3, z3);
+		glEnd();
 
 
-	// x0 = 1.0f; y0 = 1.0f; z0 = -(0*1.0f  + -0.5406*1.0f )/0.8370;
-	// x1 = 1.0f; y1 =-1.0f; z1 = -(0*1.0f  + -0.5406*-1.0f)/0.8370;
-	// x2 =-1.0f; y2 =-1.0f; z2 = -(0*-1.0f + -0.5406*-1.0f)/0.8370;
-	// x3 =-1.0f; y3 = 1.0f; z3 = -(0*-1.0f + -0.5406*1.0f )/0.8370;
+		// x0 = 1.0f; y0 = 1.0f; z0 = -(0*1.0f  + -0.5406*1.0f )/0.8370;
+		// x1 = 1.0f; y1 =-1.0f; z1 = -(0*1.0f  + -0.5406*-1.0f)/0.8370;
+		// x2 =-1.0f; y2 =-1.0f; z2 = -(0*-1.0f + -0.5406*-1.0f)/0.8370;
+		// x3 =-1.0f; y3 = 1.0f; z3 = -(0*-1.0f + -0.5406*1.0f )/0.8370;
 
-	// glBegin(GL_QUADS); 
-	// 	glColor4f(0.4f, 0.0f, 0.0f, 0.1f);
-	// 	glVertex3f(x0, y0, z0);
-	// 	glVertex3f(x1, y1, z1);
-	// 	glVertex3f(x2, y2, z2);
-	// 	glVertex3f(x3, y3, z3);
-	// glEnd();
+		// glBegin(GL_QUADS); 
+		// 	glColor4f(0.4f, 0.0f, 0.0f, 0.1f);
+		// 	glVertex3f(x0, y0, z0);
+		// 	glVertex3f(x1, y1, z1);
+		// 	glVertex3f(x2, y2, z2);
+		// 	glVertex3f(x3, y3, z3);
+		// glEnd();
+		glDisable(GL_BLEND);	
+	}	
 
 
-
-
-//		CLIP
- //    //glPushMatrix( );
- //        glTranslatef(0.0f, 0.0f, 0.0f );
- //        glClipPlane( GL_CLIP_PLANE0, eqn1 );
- //    	glEnable( GL_CLIP_PLANE0 );
- //    //glPopMatrix( );
-	glDisable(GL_BLEND);	
 
      // glColor4f( 0.4f, .4f, 1.0f, 0.2f );
      // glutSolidSphere( .23, 16, 16 );
@@ -618,12 +627,11 @@ void CGlutWindow::cgRenderGeometry() {
 	}
 	glEnd();
 
-	CVector plano(CZ, BY,AX, 0);
+	if(m_drawPlane)
+		m_nMode = 3;
 
 	CGprofile vertProfile = s_vertexProfile;
 	CGprofile fragProfile = s_fragmentProfile;
-
-
 
 	CGprogram vertProg; 
 	CGprogram fragProg; 
@@ -634,11 +642,7 @@ void CGlutWindow::cgRenderGeometry() {
 		case 0:
 			vertProg = m_pVertexPrograms[0];
 			fragProg = m_pFragmentPrograms[0];
-			cgGLSetParameter4dv(cgGetNamedParameter(fragProg,"plano"),&(plano[0]));
-			cgGLSetStateMatrixParameter(cgGetNamedParameter(fragProg, "ModelViewProj"),
-                                CG_GL_MODELVIEW_MATRIX, CG_GL_MATRIX_IDENTITY);			
 			break;
-
 		case 1:
 			vertProg = m_pVertexPrograms[0];
 			fragProg = m_pFragmentPrograms[1];
@@ -659,13 +663,21 @@ void CGlutWindow::cgRenderGeometry() {
 			fragProg = m_pFragmentPrograms[2];
 			cgGLSetParameter3dv(cgGetNamedParameter(fragProg,"viewVec"),&(viewVec[0]));
 			break;
+		case 3:
+			CVector plano(m_planeInfo.CZ, m_planeInfo.BY,m_planeInfo.AX, 0);
+			vertProg = m_pVertexPrograms[1];
+			fragProg = m_pFragmentPrograms[3];
+			cgGLSetParameter4dv(cgGetNamedParameter(fragProg,"plano"),&(plano[0]));
+			cgGLSetStateMatrixParameter(cgGetNamedParameter(fragProg, "ModelViewProj"),
+                                CG_GL_MODELVIEW_MATRIX, CG_GL_MATRIX_IDENTITY);			
+			break;
 
 	}
 
 	
 	// Bind uniform parameters to vertex shader
-
-	cgGLSetStateMatrixParameter(cgGetNamedParameter(vertProg, "ModelView"),
+	if(m_drawPlane)
+		cgGLSetStateMatrixParameter(cgGetNamedParameter(vertProg, "ModelView"),
                         CG_GL_MODELVIEW_MATRIX, CG_GL_MATRIX_IDENTITY);			
 
 
@@ -810,8 +822,8 @@ bool CGlutWindow::handleMoveEvent(int x, int y) {
 }
 
 
-#define NUM_FRAGPROGS 3
-#define NUM_VERTPROGS 1
+#define NUM_FRAGPROGS 4
+#define NUM_VERTPROGS 2
 
 bool CGlutWindow::createPrograms()
 {
@@ -823,11 +835,14 @@ bool CGlutWindow::createPrograms()
 	m_pVertexPrograms   = new CGprogram[NUM_VERTPROGS];
 	m_pFragmentPrograms = new CGprogram[NUM_FRAGPROGS];
 
-	const char *strVertProgFiles[NUM_VERTPROGS] = {"../src/shader/vp_simple.cg"};
+	const char *strVertProgFiles[NUM_VERTPROGS] = {
+		"../src/shader/vp_simple.cg",
+		"../src/shader/vp_drawPlane.cg"};
 	const char *strFragProgFiles[NUM_FRAGPROGS] = {
 		"../src/shader/fp_emission_absorption.cg", 
 		"../src/shader/fp_emis_abs_gradlightPhong.cg",
-		"../src/shader/fp_showGradient.cg"};
+		"../src/shader/fp_showGradient.cg",
+		"../src/shader/fp_drawPlane.cg"};
 	
 	cgGLEnableProfile(vertProfile);
 	cgGLEnableProfile(fragProfile);

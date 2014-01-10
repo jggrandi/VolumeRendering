@@ -1,20 +1,16 @@
 
-
 void main(float4   VertexIn   : POSITION, 
           float3   TexCoordIn : TEXCOORD0,
       
 		  // output variables
           out float4 VertexOut    : POSITION,
           out float3 TexCoordOut   : TEXCOORD0,
-          out float4 vo,
-          uniform float4x4 ModelViewProj,
-          uniform float4x4 ModelView
+          
+          uniform float4x4 ModelViewProj
           )
 {
  
     VertexOut = mul(ModelViewProj, VertexIn);
-    ModelView[0][3]=0.0; ModelView[1][3]=0.0; ModelView[2][3]=0.0; ModelView[3][3]=0.0;
-    vo = mul(ModelView, VertexIn);
 	TexCoordOut = (VertexIn.xyz + 1.0)/2.0;
-
+    
 }

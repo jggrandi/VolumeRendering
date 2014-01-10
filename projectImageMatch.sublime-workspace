@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"c_a",
+				"c_argv"
+			],
+			[
 				"GL",
 				"GLfloat"
 			],
@@ -508,6 +512,15 @@
 			}
 		},
 		{
+			"file": "core.cpp",
+			"settings":
+			{
+				"buffer_size": 1809,
+				"line_ending": "Unix",
+				"name": "#include \"core.h\""
+			}
+		},
+		{
 			"file": "GlutCgWindow.cpp",
 			"settings":
 			{
@@ -521,15 +534,6 @@
 			{
 				"buffer_size": 582,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "core.cpp",
-			"settings":
-			{
-				"buffer_size": 1587,
-				"line_ending": "Unix",
-				"name": "#include \"core.h\""
 			}
 		},
 		{
@@ -552,7 +556,7 @@
 			"file": "GlutWindow.h",
 			"settings":
 			{
-				"buffer_size": 1885,
+				"buffer_size": 2085,
 				"line_ending": "Windows"
 			}
 		},
@@ -576,7 +580,7 @@
 			"file": "GlutWindow.cpp",
 			"settings":
 			{
-				"buffer_size": 21623,
+				"buffer_size": 24345,
 				"line_ending": "Windows"
 			}
 		},
@@ -608,7 +612,7 @@
 			"file": "shader/fp_emission_absorption.cg",
 			"settings":
 			{
-				"buffer_size": 227,
+				"buffer_size": 400,
 				"line_ending": "Unix"
 			}
 		},
@@ -616,7 +620,7 @@
 			"file": "shader/vp_simple.cg",
 			"settings":
 			{
-				"buffer_size": 375,
+				"buffer_size": 546,
 				"line_ending": "Windows"
 			}
 		},
@@ -624,7 +628,7 @@
 			"file": "main.cpp",
 			"settings":
 			{
-				"buffer_size": 311,
+				"buffer_size": 310,
 				"line_ending": "Unix"
 			}
 		},
@@ -632,7 +636,7 @@
 			"file": "utils.h",
 			"settings":
 			{
-				"buffer_size": 1139,
+				"buffer_size": 1237,
 				"line_ending": "Unix"
 			}
 		}
@@ -685,6 +689,7 @@
 	},
 	"file_history":
 	[
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/utils.h",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/Fundamentos Matemáticos para CG/trabalho final/PointCloud/models/cat.txt",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/shader/fp_emis_abs_gradlightPhong.cg",
 		"/run/user/1000/gvfs/sftp:host=sutherland,port=222,user=jggrandi/home/pub/modelos/Pamplona - Dissertação/rp.def",
@@ -811,8 +816,7 @@
 		"/run/media/jeronimo/Data/Projetos/Devel 2009/SmartContour/SmartContour/ContourArray.cpp",
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/systemmessages.cpp",
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Missao_exterior/draft.txt",
-		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Missao_exterior/draft.txt",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Missao_exterior/tex/ref.bib"
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Missao_exterior/draft.txt"
 	],
 	"find":
 	{
@@ -830,6 +834,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"AX",
+			";\n",
+			"-0.5486",
+			"0.8360",
+			"-0.5406",
+			"-0.5486",
+			"0.8360",
 			"eqn1",
 			"demo",
 			"renderGeometry",
@@ -950,14 +961,7 @@
 			"LoadImage",
 			"LoadData",
 			"OnDestroy",
-			"\n	",
-			"colMatriz",
-			"10",
-			"float",
-			"maior",
-			"menor",
-			"666666",
-			"calculaSimilaridade"
+			"\n	"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -975,7 +979,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1007,6 +1011,34 @@
 				},
 				{
 					"buffer": 1,
+					"file": "core.cpp",
+					"settings":
+					{
+						"buffer_size": 1809,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								699,
+								699
+							]
+						],
+						"settings":
+						{
+							"auto_name": "#include \"core.h\"",
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
 					"file": "GlutCgWindow.cpp",
 					"settings":
 					{
@@ -1034,7 +1066,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "GlutCgWindow.h",
 					"settings":
 					{
@@ -1051,34 +1083,6 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "core.cpp",
-					"settings":
-					{
-						"buffer_size": 1587,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								833,
-								833
-							]
-						],
-						"settings":
-						{
-							"auto_name": "#include \"core.h\"",
 							"syntax": "Packages/C++/C++.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
@@ -1145,15 +1149,15 @@
 					"file": "GlutWindow.h",
 					"settings":
 					{
-						"buffer_size": 1885,
+						"buffer_size": 2085,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								593,
-								593
+								350,
+								350
 							]
 						],
 						"settings":
@@ -1162,7 +1166,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 360.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1223,7 +1227,7 @@
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -1231,15 +1235,15 @@
 					"file": "GlutWindow.cpp",
 					"settings":
 					{
-						"buffer_size": 21623,
+						"buffer_size": 24345,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3044,
-								3044
+								512,
+								512
 							]
 						],
 						"settings":
@@ -1248,7 +1252,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1291.0,
+						"translation.y": 155.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1337,7 +1341,7 @@
 					"file": "shader/fp_emission_absorption.cg",
 					"settings":
 					{
-						"buffer_size": 227,
+						"buffer_size": 400,
 						"regions":
 						{
 						},
@@ -1350,7 +1354,8 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1363,20 +1368,22 @@
 					"file": "shader/vp_simple.cg",
 					"settings":
 					{
-						"buffer_size": 375,
+						"buffer_size": 546,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								294,
-								294
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1389,15 +1396,15 @@
 					"file": "main.cpp",
 					"settings":
 					{
-						"buffer_size": 311,
+						"buffer_size": 310,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								308,
-								308
+								169,
+								169
 							]
 						],
 						"settings":
@@ -1416,15 +1423,15 @@
 					"file": "utils.h",
 					"settings":
 					{
-						"buffer_size": 1139,
+						"buffer_size": 1237,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								631,
-								631
+								872,
+								872
 							]
 						],
 						"settings":

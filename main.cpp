@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 
 	int option_index = 0;
 	
-	if (argc != 6)
+	if (argc < 6)
 	{
 		printf("%s",usage);
 		return -1;

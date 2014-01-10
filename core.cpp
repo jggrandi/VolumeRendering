@@ -10,6 +10,7 @@ Core::Core(int c_argc, char **c_argv)
 	glutInit(&c_argc, c_argv);
 
 	DATAINFO c_datasetInfo;
+	PLANE_EQ c_planeInfo;
 
 	c_datasetInfo.inputFileName= c_argv[1];
 	c_datasetInfo.resWidth	   = atoi(c_argv[2]);
@@ -18,7 +19,15 @@ Core::Core(int c_argc, char **c_argv)
 	c_datasetInfo.endStack     = atoi(c_argv[5]);
 	c_datasetInfo.resDepth     = c_datasetInfo.endStack - c_datasetInfo.initStack;
 	
-	c_pMainWindow = new CGlutWindow(c_datasetInfo);	
+	if(c_argv[6] != NULL)
+	{
+		c_planeInfo.AX			   = atof(c_argv[6]);
+		c_planeInfo.BY			   = atof(c_argv[7]);
+		c_planeInfo.CZ			   = atof(c_argv[8]);	
+		c_pMainWindow = new CGlutWindow(c_datasetInfo, c_planeInfo);
+	}
+	else
+		c_pMainWindow = new CGlutWindow(c_datasetInfo);
 }
 
 Core::~Core(){}

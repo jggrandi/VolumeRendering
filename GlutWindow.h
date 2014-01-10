@@ -21,6 +21,7 @@ class CGlutWindow
 public:
 	CGlutWindow();
 	CGlutWindow(DATAINFO dInfo);
+	CGlutWindow(DATAINFO dInfo, PLANE_EQ dPlane);
 	~CGlutWindow(void);
 
 	enum {
@@ -51,10 +52,13 @@ public:
 protected:
     //
     DATAINFO m_datasetInfo;
+    PLANE_EQ m_planeInfo;
+
 	int      m_nMode;
 	bool	 m_showGrid; 
 	bool	 m_showAxis;
 	bool     m_bDisplayTF;
+	bool	 m_drawPlane;
 	GLuint   m_pTextureIds[3];
 	int      m_nNumSlices;
 	CVector  m_pVertices[8];
@@ -83,6 +87,7 @@ protected:
 	int m_nMouseState;
 	int m_nInteractionMode;
 
+	void initializeAll();
 	void initializeAppParameters();
 	void initializeGL();
 	bool loadTextures();

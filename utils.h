@@ -55,6 +55,14 @@ struct twoInts
     float value;
 };
 
+typedef struct planeEquation
+{
+    float AX;
+    float BY;
+    float CZ;
+    float D;
+}PLANE_EQ;
+
 struct Edge {
 	public:
 		Edge(int i, int j) {nV1=i; nV2=j;}
