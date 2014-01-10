@@ -13,6 +13,11 @@
 #define ZOOM_MAX (10.0)
 //#define DISABLE_DRAGGING
 
+#define AX 0
+#define BY -0.347025
+#define CZ 0.937856
+
+
 static void handleCgError() 
 {
     fprintf(stderr, "Cg error: %s\n", cgGetErrorString(cgGetError()));
@@ -29,7 +34,8 @@ CGlutWindow::CGlutWindow(DATAINFO dInfo)
 	m_pCameraArcball = new CArcBall();
 	m_pLightArcball = new CArcBall();
 
-	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
+
+	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGBA | GLUT_ALPHA);
 	glutInitWindowSize (800,600); 
 	glutInitWindowPosition (0, 0);
 	glutCreateWindow ("Volume Rendering");
@@ -118,6 +124,67 @@ void CGlutWindow::renderFrame() {
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	if(m_showGrid)
+	{
+		glColor3f(1.0f,1.0f,1.0f);
+		defaultGrid(2.5f,0.5f);
+	}
+	if(m_showAxis)
+		defaultAxis(3.0f,5.0f);	
+
+	float z0,z1,z2,z3;	
+	float x0,x1,x2,x3;
+	float y0,y1,y2,y3;
+
+
+	x0 = 1.0f; y0 = 1.0f; z0 = -(CZ*1.0f  + BY*1.0f )/AX;
+	x1 = 1.0f; y1 =-1.0f; z1 = -(CZ*1.0f  + BY*-1.0f)/AX;
+	x2 =-1.0f; y2 =-1.0f; z2 = -(CZ*-1.0f + BY*-1.0f)/AX;
+	x3 =-1.0f; y3 = 1.0f; z3 = -(CZ*-1.0f + BY*1.0f )/AX;
+
+	glEnable (GL_BLEND);
+	
+	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
+	glColor4f(0.0f, 0.4f, 0.0f, 0.5f);
+	glBegin(GL_QUADS); 
+		
+		glVertex3f(x0, y0, z0);
+		glVertex3f(x1, y1, z1);
+		glVertex3f(x2, y2, z2);
+		glVertex3f(x3, y3, z3);
+	glEnd();
+
+
+	// x0 = 1.0f; y0 = 1.0f; z0 = -(0*1.0f  + -0.5406*1.0f )/0.8370;
+	// x1 = 1.0f; y1 =-1.0f; z1 = -(0*1.0f  + -0.5406*-1.0f)/0.8370;
+	// x2 =-1.0f; y2 =-1.0f; z2 = -(0*-1.0f + -0.5406*-1.0f)/0.8370;
+	// x3 =-1.0f; y3 = 1.0f; z3 = -(0*-1.0f + -0.5406*1.0f )/0.8370;
+
+	// glBegin(GL_QUADS); 
+	// 	glColor4f(0.4f, 0.0f, 0.0f, 0.1f);
+	// 	glVertex3f(x0, y0, z0);
+	// 	glVertex3f(x1, y1, z1);
+	// 	glVertex3f(x2, y2, z2);
+	// 	glVertex3f(x3, y3, z3);
+	// glEnd();
+
+
+
+
+//		CLIP
+ //    //glPushMatrix( );
+ //        glTranslatef(0.0f, 0.0f, 0.0f );
+ //        glClipPlane( GL_CLIP_PLANE0, eqn1 );
+ //    	glEnable( GL_CLIP_PLANE0 );
+ //    //glPopMatrix( );
+	glDisable(GL_BLEND);	
+
+     // glColor4f( 0.4f, .4f, 1.0f, 0.2f );
+     // glutSolidSphere( .23, 16, 16 );
+
+	// glDisable(GL_CLIP_PLANE0); 
+
     renderGeometry();
 
 	glutSwapBuffers();
@@ -156,7 +223,19 @@ void CGlutWindow::keyEvent(unsigned char key,int x,int y)
 			{
 				m_bDisplayTF = !m_bDisplayTF;
 			}
-			break;				
+			break;	
+		case 'a':			
+		case 'A':
+			{
+				m_showAxis = !m_showAxis;
+			}
+			break;			
+		case 'g':		
+		case 'G':
+			{
+				m_showGrid = !m_showGrid;
+			}
+			break;
 		case 'c':
 			{
 				m_nInteractionMode = MOVE_CAMERA;
@@ -371,6 +450,8 @@ void CGlutWindow::initializeAppParameters()
 {
 	m_nMode = 0;
 	m_bDisplayTF = false;
+	m_showGrid = false;
+	m_showAxis = false;
 
 	m_pVertices[0] = CVector(-1.0,-1.0,-1.0, 1.0,  0.0, 0.0, 0.0);
 	m_pVertices[1] = CVector( 1.0,-1.0,-1.0, 1.0,  1.0, 0.0, 0.0);
@@ -398,7 +479,8 @@ void CGlutWindow::initializeAppParameters()
 	m_nNumSlices = 512;
 	m_nWidth = 0;
 	m_nHeight = 0;
-
+	
+	eqn1[0] = 0.0f; eqn1[1] = -0.5406f; eqn1[2] = 0.8412f; eqn1[3] = 0;
 	m_pTransferFunction = new CTransferFunction();
 }
 
@@ -536,9 +618,11 @@ void CGlutWindow::cgRenderGeometry() {
 	}
 	glEnd();
 
-	
+	CVector plano(CZ, BY,AX, 0);
+
 	CGprofile vertProfile = s_vertexProfile;
 	CGprofile fragProfile = s_fragmentProfile;
+
 
 
 	CGprogram vertProg; 
@@ -550,6 +634,9 @@ void CGlutWindow::cgRenderGeometry() {
 		case 0:
 			vertProg = m_pVertexPrograms[0];
 			fragProg = m_pFragmentPrograms[0];
+			cgGLSetParameter4dv(cgGetNamedParameter(fragProg,"plano"),&(plano[0]));
+			cgGLSetStateMatrixParameter(cgGetNamedParameter(fragProg, "ModelViewProj"),
+                                CG_GL_MODELVIEW_MATRIX, CG_GL_MATRIX_IDENTITY);			
 			break;
 
 		case 1:
@@ -577,6 +664,11 @@ void CGlutWindow::cgRenderGeometry() {
 
 	
 	// Bind uniform parameters to vertex shader
+
+	cgGLSetStateMatrixParameter(cgGetNamedParameter(vertProg, "ModelView"),
+                        CG_GL_MODELVIEW_MATRIX, CG_GL_MATRIX_IDENTITY);			
+
+
     cgGLSetStateMatrixParameter(cgGetNamedParameter(vertProg, "ModelViewProj"),
                                 CG_GL_MODELVIEW_PROJECTION_MATRIX,
                                 CG_GL_MATRIX_IDENTITY);
@@ -800,4 +892,27 @@ void CGlutWindow::chooseProfiles()
         }
     }
 	cgGLSetOptimalOptions(s_fragmentProfile);
+}
+
+void CGlutWindow::defaultGrid(float gridSize, float gridQuadSpacing)
+{
+	glBegin(GL_LINES);
+		for (GLfloat i = -gridSize; i <= gridSize; i += gridQuadSpacing) 
+		{
+			glVertex3f(i, 0, gridSize); glVertex3f(i, 0, -gridSize);
+			glVertex3f(gridSize, 0, i); glVertex3f(-gridSize, 0, i);
+		}
+	glEnd();
+
+}
+
+void CGlutWindow::defaultAxis(float axisSize, float axisLineWidth)
+{
+	glLineWidth(axisLineWidth);
+	glBegin(GL_LINES);
+		glColor3f(1, 0, 0); glVertex3f(0, 0, 0); glVertex3f(axisSize, 0, 0);
+		glColor3f(0, 1, 0); glVertex3f(0, 0, 0); glVertex3f(0, axisSize, 0);
+		glColor3f(0, 0, 1); glVertex3f(0, 0, 0); glVertex3f(0, 0, axisSize);
+	glEnd();
+
 }

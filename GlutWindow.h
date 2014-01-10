@@ -52,6 +52,8 @@ protected:
     //
     DATAINFO m_datasetInfo;
 	int      m_nMode;
+	bool	 m_showGrid; 
+	bool	 m_showAxis;
 	bool     m_bDisplayTF;
 	GLuint   m_pTextureIds[3];
 	int      m_nNumSlices;
@@ -85,7 +87,14 @@ protected:
 	void initializeGL();
 	bool loadTextures();
 	bool createPrograms();
+
+	void defaultGrid(float gridSize, float gridQuadSpacing);
+	void defaultAxis(float axisSize, float axisLineWidth);
+	
 	CTransferFunction *m_pTransferFunction;
+
+	// clipping planes
+	GLdouble eqn1[4];
 
 private:
  	CGcontext s_CgContext;
