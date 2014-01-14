@@ -22,6 +22,7 @@ public:
 	CGlutWindow();
 	CGlutWindow(DATAINFO dInfo);
 	CGlutWindow(DATAINFO dInfo, PLANE_EQ dPlane);
+	CGlutWindow(DATAINFO dInfo, PLANE_EQ dPlane1, PLANE_EQ dPlane2);
 	~CGlutWindow(void);
 
 	enum {
@@ -52,13 +53,15 @@ public:
 protected:
     //
     DATAINFO m_datasetInfo;
-    PLANE_EQ m_planeInfo;
+    PLANE_EQ m_planeInfo1;
+    PLANE_EQ m_planeInfo2;
 
 	int      m_nMode;
 	bool	 m_showGrid; 
 	bool	 m_showAxis;
 	bool     m_bDisplayTF;
-	bool	 m_drawPlane;
+	bool	 m_drawPlane1;
+	bool	 m_drawPlane2;
 	double	 m_changeVolumeSide;
 	GLuint   m_pTextureIds[3];
 	int      m_nNumSlices;

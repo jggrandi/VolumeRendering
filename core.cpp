@@ -10,7 +10,10 @@ Core::Core(int c_argc, char **c_argv)
 	glutInit(&c_argc, c_argv);
 
 	DATAINFO c_datasetInfo;
-	PLANE_EQ c_planeInfo;
+	PLANE_EQ c_planeInfo1;
+	PLANE_EQ c_planeInfo2;
+
+	int planesToRender=0;
 
 	c_datasetInfo.inputFileName= c_argv[1];
 	c_datasetInfo.resWidth	   = atoi(c_argv[2]);
@@ -21,14 +24,56 @@ Core::Core(int c_argc, char **c_argv)
 	
 	if(c_argv[6] != NULL)
 	{
-		c_planeInfo.AX			   = atof(c_argv[6]);
-		c_planeInfo.BY			   = atof(c_argv[7]);
-		c_planeInfo.CZ			   = atof(c_argv[8]);	
-		c_planeInfo.D              = atof(c_argv[9]);
-		c_pMainWindow = new CGlutWindow(c_datasetInfo, c_planeInfo);
+		if(c_argc <= 9)
+		{
+			printf("Not enough parameters\n");
+			planesToRender = -1;
+		}
+		else
+			planesToRender++;
 	}
-	else
+	if(c_argv[10] != NULL)
+	{
+		if(c_argc <= 13)
+		{
+			printf("Not enough parameters\n");
+			planesToRender = -1;
+		}	
+		else	
+			planesToRender++;
+	}
+
+	if(planesToRender < 1)
+	{
 		c_pMainWindow = new CGlutWindow(c_datasetInfo);
+		printf("Zero planes loaded...\n");
+	}
+	else if(planesToRender == 1)
+	{
+		c_planeInfo1.AX			   = atof(c_argv[6]);
+		c_planeInfo1.BY			   = atof(c_argv[7]);
+		c_planeInfo1.CZ			   = atof(c_argv[8]);	
+		c_planeInfo1.D             = atof(c_argv[9]);
+		c_pMainWindow = new CGlutWindow(c_datasetInfo, c_planeInfo1);
+		printf("One plane loaded...\n");
+
+	}
+	else if(planesToRender == 2)
+	{
+		c_planeInfo1.AX			   = atof(c_argv[6]);
+		c_planeInfo1.BY			   = atof(c_argv[7]);
+		c_planeInfo1.CZ			   = atof(c_argv[8]);	
+		c_planeInfo1.D             = atof(c_argv[9]);
+
+		c_planeInfo2.AX			   = atof(c_argv[10]);
+		c_planeInfo2.BY			   = atof(c_argv[11]);
+		c_planeInfo2.CZ			   = atof(c_argv[12]);	
+		c_planeInfo2.D             = atof(c_argv[13]);
+
+		c_pMainWindow = new CGlutWindow(c_datasetInfo, c_planeInfo1, c_planeInfo2);
+		printf("Two planes loaded...\n");
+	}
+
 }
 
 Core::~Core(){}

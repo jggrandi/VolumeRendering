@@ -27,16 +27,30 @@ CGlutWindow::CGlutWindow(){};
 CGlutWindow::CGlutWindow(DATAINFO dInfo)
 {
 	m_datasetInfo = dInfo;
-	m_drawPlane   = false;
+	m_drawPlane1   = false;
+	m_drawPlane2   = false;
 	initializeAll();
 }
 
 CGlutWindow::CGlutWindow(DATAINFO dInfo, PLANE_EQ dPlane)
 {
 	m_datasetInfo = dInfo;
-	m_planeInfo   = dPlane;
-	m_drawPlane   = true;
+	m_planeInfo1   = dPlane;
+	m_drawPlane1   = true;
+	m_drawPlane2   = false;
 	initializeAll();
+}
+
+
+CGlutWindow::CGlutWindow(DATAINFO dInfo, PLANE_EQ dPlane1, PLANE_EQ dPlane2)
+{
+	m_datasetInfo = dInfo;
+	m_planeInfo1   = dPlane1;
+	m_planeInfo2   = dPlane2;
+	m_drawPlane1   = true;
+	m_drawPlane2   = true;
+	initializeAll();
+
 }
 
 
@@ -148,11 +162,14 @@ void CGlutWindow::renderFrame() {
 	if(m_showAxis)
 		defaultAxis(3.0f,5.0f);	
 
-	if(m_drawPlane)
+	double z0,z1,z2,z3;	
+	double x0,x1,x2,x3;
+	double y0,y1,y2,y3;
+
+
+	if(m_drawPlane1)
 	{
-		double z0,z1,z2,z3;	
-		double x0,x1,x2,x3;
-		double y0,y1,y2,y3;
+
 
 /* tentativa com o dot product
 		// double d0,d1,d2,d3;
@@ -183,14 +200,14 @@ void CGlutWindow::renderFrame() {
 		// printf("%f, %f, %f, %f\n",x3,y3,z3,d3);
 */
 
-		x0 = 1.0f; y0 = 1.0f; z0 = -(m_planeInfo.CZ*1.0f  + m_planeInfo.BY*1.0f + m_planeInfo.D )/m_planeInfo.AX;
-		x1 = 1.0f; y1 =-1.0f; z1 = -(m_planeInfo.CZ*1.0f  + m_planeInfo.BY*-1.0f + m_planeInfo.D)/m_planeInfo.AX;
-		x2 =-1.0f; y2 =-1.0f; z2 = -(m_planeInfo.CZ*-1.0f + m_planeInfo.BY*-1.0f + m_planeInfo.D)/m_planeInfo.AX;
-		x3 =-1.0f; y3 = 1.0f; z3 = -(m_planeInfo.CZ*-1.0f + m_planeInfo.BY*1.0f + m_planeInfo.D)/m_planeInfo.AX;
+		x0 = 1.0f; y0 = 1.0f; z0 = -(m_planeInfo1.CZ*1.0f  + m_planeInfo1.BY*1.0f + m_planeInfo1.D )/m_planeInfo1.AX;
+		x1 = 1.0f; y1 =-1.0f; z1 = -(m_planeInfo1.CZ*1.0f  + m_planeInfo1.BY*-1.0f + m_planeInfo1.D)/m_planeInfo1.AX;
+		x2 =-1.0f; y2 =-1.0f; z2 = -(m_planeInfo1.CZ*-1.0f + m_planeInfo1.BY*-1.0f + m_planeInfo1.D)/m_planeInfo1.AX;
+		x3 =-1.0f; y3 = 1.0f; z3 = -(m_planeInfo1.CZ*-1.0f + m_planeInfo1.BY*1.0f + m_planeInfo1.D)/m_planeInfo1.AX;
 		
-	  glEnable(GL_BLEND);		    // Turn Blending On
-	  glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off		
-		
+		glEnable(GL_BLEND);		    // Turn Blending On
+		glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off		
+
 		glBegin(GL_QUADS); 
 			glColor4f(0.0f, 0.4f, 0.0f, 0.5f);
 			glVertex3f(x0, y0, z0);
@@ -198,23 +215,28 @@ void CGlutWindow::renderFrame() {
 			glVertex3f(x2, y2, z2);
 			glVertex3f(x3, y3, z3);
 		glEnd();
-	  glDisable(GL_BLEND);		  
-	  glEnable(GL_DEPTH_TEST); 
+		glDisable(GL_BLEND);		  
+		glEnable(GL_DEPTH_TEST); 
+	}
 
+	if(m_drawPlane2)
+	{
+		x0 = 1.0f; y0 = 1.0f; z0 = -(m_planeInfo2.CZ*1.0f  + m_planeInfo2.BY*1.0f + m_planeInfo2.D )/m_planeInfo2.AX;
+		x1 = 1.0f; y1 =-1.0f; z1 = -(m_planeInfo2.CZ*1.0f  + m_planeInfo2.BY*-1.0f + m_planeInfo2.D)/m_planeInfo2.AX;
+		x2 =-1.0f; y2 =-1.0f; z2 = -(m_planeInfo2.CZ*-1.0f + m_planeInfo2.BY*-1.0f + m_planeInfo2.D)/m_planeInfo2.AX;
+		x3 =-1.0f; y3 = 1.0f; z3 = -(m_planeInfo2.CZ*-1.0f + m_planeInfo2.BY*1.0f + m_planeInfo2.D)/m_planeInfo2.AX;
 
-
-		// x0 = 1.0f; y0 = 1.0f; z0 = -(0*1.0f  + 0.3609*1.0f )/-0.9325;
-		// x1 = 1.0f; y1 =-1.0f; z1 = -(0*1.0f  + 0.3609*-1.0f)/-0.9325;
-		// x2 =-1.0f; y2 =-1.0f; z2 = -(0*-1.0f + 0.3609*-1.0f)/-0.9325;
-		// x3 =-1.0f; y3 = 1.0f; z3 = -(0*-1.0f + 0.3609*1.0f )/-0.9325;
-
-		// glBegin(GL_QUADS); 
-		// 	glColor4f(0.4f, 0.0f, 0.0f, 0.1f);
-		// 	glVertex3f(x0, y0, z0);
-		// 	glVertex3f(x1, y1, z1);
-		// 	glVertex3f(x2, y2, z2);
-		// 	glVertex3f(x3, y3, z3);
-		// glEnd();
+		glEnable(GL_BLEND);		    // Turn Blending On
+		glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off		
+		glBegin(GL_QUADS); 
+			glColor4f(0.4f, 0.0f, 0.0f, 0.5f);
+			glVertex3f(x0, y0, z0);
+			glVertex3f(x1, y1, z1);
+			glVertex3f(x2, y2, z2);
+			glVertex3f(x3, y3, z3);
+		glEnd();
+		glDisable(GL_BLEND);		  
+		glEnable(GL_DEPTH_TEST); 
 
 	}	
 
@@ -267,14 +289,12 @@ void CGlutWindow::keyEvent(unsigned char key,int x,int y)
 			{
 				if(m_changeVolumeSide < 3)
 					m_changeVolumeSide++;
-				printf("%f\n",m_changeVolumeSide );
 			}
 			break;	
 		case 'I':
 			{
 				if(m_changeVolumeSide > 0)
 					m_changeVolumeSide--;
-				printf("%f\n",m_changeVolumeSide );
 			}
 			break;
 		case 'a':			
@@ -675,7 +695,7 @@ void CGlutWindow::cgRenderGeometry() {
 	}
 	glEnd();
 
-	if(m_drawPlane)
+	if(m_drawPlane1)
 		m_nMode = 3;
 
 	CGprofile vertProfile = s_vertexProfile;
@@ -712,7 +732,7 @@ void CGlutWindow::cgRenderGeometry() {
 			cgGLSetParameter3dv(cgGetNamedParameter(fragProg,"viewVec"),&(viewVec[0]));
 			break;
 		case 3:
-			plano.set(m_planeInfo.CZ, m_planeInfo.BY,m_planeInfo.AX, m_planeInfo.D);
+			plano.set(m_planeInfo1.CZ, m_planeInfo1.BY,m_planeInfo1.AX, m_planeInfo1.D);
 			vertProg = m_pVertexPrograms[1];
 			fragProg = m_pFragmentPrograms[3];
 			cgGLSetParameter4dv(cgGetNamedParameter(fragProg,"plano"),&(plano[0]));
@@ -725,7 +745,7 @@ void CGlutWindow::cgRenderGeometry() {
 
 	
 	// Bind uniform parameters to vertex shader
-	if(m_drawPlane)
+	if(m_drawPlane1)
 		cgGLSetStateMatrixParameter(cgGetNamedParameter(vertProg, "ModelView"),
                         CG_GL_MODELVIEW_MATRIX, CG_GL_MATRIX_IDENTITY);			
 
