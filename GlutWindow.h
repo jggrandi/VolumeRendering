@@ -59,6 +59,7 @@ protected:
 	bool	 m_showAxis;
 	bool     m_bDisplayTF;
 	bool	 m_drawPlane;
+	double	 m_changeVolumeSide;
 	GLuint   m_pTextureIds[3];
 	int      m_nNumSlices;
 	CVector  m_pVertices[8];

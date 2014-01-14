@@ -220,6 +220,11 @@ CVector::set(
 	value_[3] = d_in;
 }
 
+void CVector::setSingleValue( const int& index_in, const double& value_in)
+{
+	value_[index_in] = value_in;
+}
+
 void
 CVector::get(
 	double& a_out, 

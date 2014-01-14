@@ -54,8 +54,8 @@ void CGlutWindow::initializeAll()
 	m_pCameraArcball = new CArcBall();
 	m_pLightArcball = new CArcBall();
 
-
-	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGBA | GLUT_ALPHA);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_ALPHA);
+	//glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGBA | GLUT_ALPHA);
 	glutInitWindowSize (800,600); 
 	glutInitWindowPosition (0, 0);
 	glutCreateWindow ("Volume Rendering");
@@ -138,6 +138,8 @@ void CGlutWindow::renderFrame() {
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	renderGeometry();
+
 	if(m_showGrid)
 	{
 		glColor3f(1.0f,1.0f,1.0f);
@@ -148,34 +150,63 @@ void CGlutWindow::renderFrame() {
 
 	if(m_drawPlane)
 	{
-		float z0,z1,z2,z3;	
-		float x0,x1,x2,x3;
-		float y0,y1,y2,y3;
+		double z0,z1,z2,z3;	
+		double x0,x1,x2,x3;
+		double y0,y1,y2,y3;
+
+/* tentativa com o dot product
+		// double d0,d1,d2,d3;
+
+		// CVector planoo(m_planeInfo.AX,m_planeInfo.BY,m_planeInfo.CZ,m_planeInfo.D);
 
 
-		x0 = 1.0f; y0 = 1.0f; z0 = -(m_planeInfo.CZ*1.0f  + m_planeInfo.BY*1.0f )/m_planeInfo.AX;
-		x1 = 1.0f; y1 =-1.0f; z1 = -(m_planeInfo.CZ*1.0f  + m_planeInfo.BY*-1.0f)/m_planeInfo.AX;
-		x2 =-1.0f; y2 =-1.0f; z2 = -(m_planeInfo.CZ*-1.0f + m_planeInfo.BY*-1.0f)/m_planeInfo.AX;
-		x3 =-1.0f; y3 = 1.0f; z3 = -(m_planeInfo.CZ*-1.0f + m_planeInfo.BY*1.0f )/m_planeInfo.AX;
+		// CVector p[4]; 
+		// p[0].set( 1.0f, 1.0f, 0.0f, 1.0f);
+		// p[1].set( 1.0f,-1.0f, 0.0f, 1.0f);
+		// p[2].set(-1.0f,-1.0f, 0.0f, 1.0f);
+		// p[3].set(-1.0f, 1.0f, 0.0f, 1.0f);
 
-		glEnable (GL_BLEND);
+		// p[0].setSingleValue(2, p[0]*planoo); 
+		// p[1].setSingleValue(2, p[1]*planoo); 
+		// p[2].setSingleValue(2, p[2]*planoo); 
+		// p[3].setSingleValue(2, p[3]*planoo); 
+
 		
-		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		// p[0].get(x0,y0,z0,d0);
+		// p[1].get(x1,y1,z1,d1);
+		// p[2].get(x2,y2,z2,d2);
+		// p[3].get(x3,y3,z3,d3);
+
+		// printf("%f, %f, %f, %f\n",x0,y0,z0,d0);
+		// printf("%f, %f, %f, %f\n",x1,y1,z1,d1);
+		// printf("%f, %f, %f, %f\n",x2,y2,z2,d2);
+		// printf("%f, %f, %f, %f\n",x3,y3,z3,d3);
+*/
+
+		x0 = 1.0f; y0 = 1.0f; z0 = -(m_planeInfo.CZ*1.0f  + m_planeInfo.BY*1.0f + m_planeInfo.D )/m_planeInfo.AX;
+		x1 = 1.0f; y1 =-1.0f; z1 = -(m_planeInfo.CZ*1.0f  + m_planeInfo.BY*-1.0f + m_planeInfo.D)/m_planeInfo.AX;
+		x2 =-1.0f; y2 =-1.0f; z2 = -(m_planeInfo.CZ*-1.0f + m_planeInfo.BY*-1.0f + m_planeInfo.D)/m_planeInfo.AX;
+		x3 =-1.0f; y3 = 1.0f; z3 = -(m_planeInfo.CZ*-1.0f + m_planeInfo.BY*1.0f + m_planeInfo.D)/m_planeInfo.AX;
 		
-		glColor4f(0.0f, 0.4f, 0.0f, 0.5f);
+	  glEnable(GL_BLEND);		    // Turn Blending On
+	  glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off		
+		
 		glBegin(GL_QUADS); 
-			
+			glColor4f(0.0f, 0.4f, 0.0f, 0.5f);
 			glVertex3f(x0, y0, z0);
 			glVertex3f(x1, y1, z1);
 			glVertex3f(x2, y2, z2);
 			glVertex3f(x3, y3, z3);
 		glEnd();
+	  glDisable(GL_BLEND);		  
+	  glEnable(GL_DEPTH_TEST); 
 
 
-		// x0 = 1.0f; y0 = 1.0f; z0 = -(0*1.0f  + -0.5406*1.0f )/0.8370;
-		// x1 = 1.0f; y1 =-1.0f; z1 = -(0*1.0f  + -0.5406*-1.0f)/0.8370;
-		// x2 =-1.0f; y2 =-1.0f; z2 = -(0*-1.0f + -0.5406*-1.0f)/0.8370;
-		// x3 =-1.0f; y3 = 1.0f; z3 = -(0*-1.0f + -0.5406*1.0f )/0.8370;
+
+		// x0 = 1.0f; y0 = 1.0f; z0 = -(0*1.0f  + 0.3609*1.0f )/-0.9325;
+		// x1 = 1.0f; y1 =-1.0f; z1 = -(0*1.0f  + 0.3609*-1.0f)/-0.9325;
+		// x2 =-1.0f; y2 =-1.0f; z2 = -(0*-1.0f + 0.3609*-1.0f)/-0.9325;
+		// x3 =-1.0f; y3 = 1.0f; z3 = -(0*-1.0f + 0.3609*1.0f )/-0.9325;
 
 		// glBegin(GL_QUADS); 
 		// 	glColor4f(0.4f, 0.0f, 0.0f, 0.1f);
@@ -184,7 +215,7 @@ void CGlutWindow::renderFrame() {
 		// 	glVertex3f(x2, y2, z2);
 		// 	glVertex3f(x3, y3, z3);
 		// glEnd();
-		glDisable(GL_BLEND);	
+
 	}	
 
 
@@ -194,8 +225,8 @@ void CGlutWindow::renderFrame() {
 
 	// glDisable(GL_CLIP_PLANE0); 
 
-    renderGeometry();
-
+    
+   
 	glutSwapBuffers();
 }
 
@@ -220,8 +251,7 @@ void CGlutWindow::keyEvent(unsigned char key,int x,int y)
 			{
 				m_nMode++;
 			}
-			break;
-				
+			break;	
 		case 'M':
 			{
 				m_nMode--;
@@ -232,7 +262,21 @@ void CGlutWindow::keyEvent(unsigned char key,int x,int y)
 			{
 				m_bDisplayTF = !m_bDisplayTF;
 			}
+			break;
+		case 'i':
+			{
+				if(m_changeVolumeSide < 3)
+					m_changeVolumeSide++;
+				printf("%f\n",m_changeVolumeSide );
+			}
 			break;	
+		case 'I':
+			{
+				if(m_changeVolumeSide > 0)
+					m_changeVolumeSide--;
+				printf("%f\n",m_changeVolumeSide );
+			}
+			break;
 		case 'a':			
 		case 'A':
 			{
@@ -451,6 +495,9 @@ void CGlutWindow::initializeGL()
     
     /* Select Color and Projection*/
     glClearColor(0.0, 0.0, 0.0, 0.0);
+
+	glBlendFunc (GL_SRC_ALPHA, GL_ONE);
+    //glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //glColor3f(1.0, 1.0, 1.0);
     glShadeModel(GL_SMOOTH);	
 }
@@ -461,6 +508,7 @@ void CGlutWindow::initializeAppParameters()
 	m_bDisplayTF = false;
 	m_showGrid = false;
 	m_showAxis = false;
+	m_changeVolumeSide = 0.0f;
 
 	m_pVertices[0] = CVector(-1.0,-1.0,-1.0, 1.0,  0.0, 0.0, 0.0);
 	m_pVertices[1] = CVector( 1.0,-1.0,-1.0, 1.0,  1.0, 0.0, 0.0);
@@ -635,7 +683,7 @@ void CGlutWindow::cgRenderGeometry() {
 
 	CGprogram vertProg; 
 	CGprogram fragProg; 
-
+	CVector plano;
 	switch(m_nMode) {
 
 		default:
@@ -664,11 +712,12 @@ void CGlutWindow::cgRenderGeometry() {
 			cgGLSetParameter3dv(cgGetNamedParameter(fragProg,"viewVec"),&(viewVec[0]));
 			break;
 		case 3:
-			CVector plano(m_planeInfo.CZ, m_planeInfo.BY,m_planeInfo.AX, 0);
+			plano.set(m_planeInfo.CZ, m_planeInfo.BY,m_planeInfo.AX, m_planeInfo.D);
 			vertProg = m_pVertexPrograms[1];
 			fragProg = m_pFragmentPrograms[3];
 			cgGLSetParameter4dv(cgGetNamedParameter(fragProg,"plano"),&(plano[0]));
-			cgGLSetStateMatrixParameter(cgGetNamedParameter(fragProg, "ModelViewProj"),
+			cgGLSetParameter1d(cgGetNamedParameter(fragProg,"side"),m_changeVolumeSide);
+			cgGLSetStateMatrixParameter(cgGetNamedParameter(fragProg, "ModelView"),
                                 CG_GL_MODELVIEW_MATRIX, CG_GL_MATRIX_IDENTITY);			
 			break;
 

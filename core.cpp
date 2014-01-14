@@ -24,6 +24,7 @@ Core::Core(int c_argc, char **c_argv)
 		c_planeInfo.AX			   = atof(c_argv[6]);
 		c_planeInfo.BY			   = atof(c_argv[7]);
 		c_planeInfo.CZ			   = atof(c_argv[8]);	
+		c_planeInfo.D              = atof(c_argv[9]);
 		c_pMainWindow = new CGlutWindow(c_datasetInfo, c_planeInfo);
 	}
 	else

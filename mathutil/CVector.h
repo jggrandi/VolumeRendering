@@ -94,6 +94,8 @@ public:
 		const double& c_in,
 		const double& d_in
 		);
+	
+	void setSingleValue( const int& index_in, const double& value_in);
 
 	void
 	get(

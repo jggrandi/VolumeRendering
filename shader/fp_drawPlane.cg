@@ -2,17 +2,34 @@ half4 main(
 		half3 uvw : TEXCOORD0,
 		half4 col : COLOR,
 		uniform float4 plano,
+		uniform float side,
 		in float4 vo,
 		uniform sampler3D volume,
-		uniform float4x4 ModelViewProj,
+		uniform float4x4 ModelView,
 		uniform sampler1D colortable) : COLOR
 {
 	half4 value = tex3D(volume,uvw);
 	vo.w = 1.0;
-	plano.w = 0.0;
-	plano = mul(ModelViewProj, plano);
-	if( dot(plano,vo) < 0.0)
+	//plano.w = 0.5;
+	ModelView[0][3]=0.0; ModelView[1][3]=0.0; ModelView[2][3]=0.0; ModelView[3][3]=1.0;
+	plano = mul(ModelView, plano);
+
+	if( (side == 0) && (dot(plano,vo) > 0.0))
 		discard;
+	else if( (side == 1) && (dot(plano,vo) < 0.0))
+		discard;
+
+	else if(side == 2)
+	{
+		if(dot(plano,vo) > 0.01)
+ 			discard;
+
+		if(dot(plano,vo) < -0.01)
+ 			discard;
+	}
+
+
+
 	half4 color = tex1D(colortable,value.a);
 	return color;  
 }
