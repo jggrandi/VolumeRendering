@@ -28,6 +28,13 @@ half4 main(
  			discard;
 	}
 
+	else if(side == 3)
+	{
+		if((dot(plano,vo) < 0.1) && (dot(plano,vo) > 0.01 ))
+ 			discard;
+
+	}
+
 
 
 	half4 color = tex1D(colortable,value.a);

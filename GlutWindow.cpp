@@ -70,7 +70,7 @@ void CGlutWindow::initializeAll()
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_ALPHA);
 	//glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGBA | GLUT_ALPHA);
-	glutInitWindowSize (800,600); 
+	glutInitWindowSize (384,288); 
 	glutInitWindowPosition (0, 0);
 	glutCreateWindow ("Volume Rendering");
 
@@ -80,7 +80,7 @@ void CGlutWindow::initializeAll()
 
 	m_dRadius = 0.5*sqrt(12.0);
 	m_vecCameraPosition.set(0.0, 0.0, 0.0,1.0);
-
+	
 	m_dCenter = m_dRadius/ sin(DEG2RAD(m_dFieldOfView)/2.0);
 
 	m_dZoom = 1.0;
@@ -114,7 +114,7 @@ void CGlutWindow::renderFrame() {
 	double dAspectRatio = double(m_nWidth)/double(m_nHeight);
 
 	// The usual OpenGL stuff to clear the screen and set up viewing.
-	glClearColor(.5, .5, 1., 1.);
+	glClearColor(1, 1, 1, 1.);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	GLfloat fTop, fRight, fFar;
@@ -152,23 +152,22 @@ void CGlutWindow::renderFrame() {
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	renderGeometry();
 
-	if(m_showGrid)
-	{
-		glColor3f(1.0f,1.0f,1.0f);
-		defaultGrid(2.5f,0.5f);
-	}
+	defaultGrid(2.5f,0.5f);
+
 	if(m_showAxis)
 		defaultAxis(3.0f,5.0f);	
+   	renderGeometry();
+
+
 
 	double z0,z1,z2,z3;	
 	double x0,x1,x2,x3;
 	double y0,y1,y2,y3;
 
 
-	if(m_drawPlane1)
-	{
+	// if(m_drawPlane1)
+	// {
 
 
 /* tentativa com o dot product
@@ -200,45 +199,54 @@ void CGlutWindow::renderFrame() {
 		// printf("%f, %f, %f, %f\n",x3,y3,z3,d3);
 */
 
-		x0 = 1.0f; y0 = 1.0f; z0 = -(m_planeInfo1.CZ*1.0f  + m_planeInfo1.BY*1.0f + m_planeInfo1.D )/m_planeInfo1.AX;
-		x1 = 1.0f; y1 =-1.0f; z1 = -(m_planeInfo1.CZ*1.0f  + m_planeInfo1.BY*-1.0f + m_planeInfo1.D)/m_planeInfo1.AX;
-		x2 =-1.0f; y2 =-1.0f; z2 = -(m_planeInfo1.CZ*-1.0f + m_planeInfo1.BY*-1.0f + m_planeInfo1.D)/m_planeInfo1.AX;
-		x3 =-1.0f; y3 = 1.0f; z3 = -(m_planeInfo1.CZ*-1.0f + m_planeInfo1.BY*1.0f + m_planeInfo1.D)/m_planeInfo1.AX;
+	// 	x0 = 1.0f; y0 = 1.0f; z0 = -(m_planeInfo1.CZ*1.0f  + m_planeInfo1.BY*1.0f + m_planeInfo1.D )/(m_planeInfo1.AX*1.0f);
+	// 	x1 = 1.0f; y1 =-1.0f; z1 = -(m_planeInfo1.CZ*1.0f  + m_planeInfo1.BY*-1.0f + m_planeInfo1.D)/(m_planeInfo1.AX*-1.0f);
+	// 	x2 =-1.0f; y2 =-1.0f; z2 = -(m_planeInfo1.CZ*-1.0f + m_planeInfo1.BY*-1.0f + m_planeInfo1.D)/(m_planeInfo1.AX*-1.0f);
+	// 	x3 =-1.0f; y3 = 1.0f; z3 = -(m_planeInfo1.CZ*-1.0f + m_planeInfo1.BY*1.0f + m_planeInfo1.D)/(m_planeInfo1.AX*1.0f);
+
+	// 	glEnable(GL_BLEND);		    // Turn Blending On
+	// 	glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off		
+
+	// 	// glBegin (GL_LINE_LOOP);
+	// 	// 	glVertex3f(x0, y0, z0);
+	// 	// 	glVertex3f(x1, y1, z1);
+	// 	// 	glVertex3f(x2, y2, z2);
+	// 	// 	glVertex3f(x3, y3, z3);
+	// 	// glEnd ();
+
+	// 	// glBegin(GL_QUADS); 
+	// 	// 	glColor4f(0.0f, 0.4f, 0.0f, m_blend);
+	// 	// 	glVertex3f(x0, y0, z0);
+	// 	// 	glVertex3f(x1, y1, z1);
+	// 	// 	glVertex3f(x2, y2, z2);
+	// 	// 	glVertex3f(x3, y3, z3);
+	// 	// glEnd();
 		
-		glEnable(GL_BLEND);		    // Turn Blending On
-		glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off		
+	// }
 
-		glBegin(GL_QUADS); 
-			glColor4f(0.0f, 0.4f, 0.0f, 0.5f);
-			glVertex3f(x0, y0, z0);
-			glVertex3f(x1, y1, z1);
-			glVertex3f(x2, y2, z2);
-			glVertex3f(x3, y3, z3);
-		glEnd();
-		glDisable(GL_BLEND);		  
-		glEnable(GL_DEPTH_TEST); 
-	}
+	// if(m_drawPlane2)
+	// {
+	// 	x0 = 1.0f; y0 = 1.0f; z0 = -(m_planeInfo2.CZ*1.0f  + m_planeInfo2.BY*1.0f + m_planeInfo2.D )/m_planeInfo2.AX;
+	// 	x1 = 1.0f; y1 =-1.0f; z1 = -(m_planeInfo2.CZ*1.0f  + m_planeInfo2.BY*-1.0f + m_planeInfo2.D)/m_planeInfo2.AX;
+	// 	x2 =-1.0f; y2 =-1.0f; z2 = -(m_planeInfo2.CZ*-1.0f + m_planeInfo2.BY*-1.0f + m_planeInfo2.D)/m_planeInfo2.AX;
+	// 	x3 =-1.0f; y3 = 1.0f; z3 = -(m_planeInfo2.CZ*-1.0f + m_planeInfo2.BY*1.0f + m_planeInfo2.D)/m_planeInfo2.AX;
 
-	if(m_drawPlane2)
-	{
-		x0 = 1.0f; y0 = 1.0f; z0 = -(m_planeInfo2.CZ*1.0f  + m_planeInfo2.BY*1.0f + m_planeInfo2.D )/m_planeInfo2.AX;
-		x1 = 1.0f; y1 =-1.0f; z1 = -(m_planeInfo2.CZ*1.0f  + m_planeInfo2.BY*-1.0f + m_planeInfo2.D)/m_planeInfo2.AX;
-		x2 =-1.0f; y2 =-1.0f; z2 = -(m_planeInfo2.CZ*-1.0f + m_planeInfo2.BY*-1.0f + m_planeInfo2.D)/m_planeInfo2.AX;
-		x3 =-1.0f; y3 = 1.0f; z3 = -(m_planeInfo2.CZ*-1.0f + m_planeInfo2.BY*1.0f + m_planeInfo2.D)/m_planeInfo2.AX;
+	// 	glEnable(GL_BLEND);		    // Turn Blending On
+	// 	glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off		
 
-		glEnable(GL_BLEND);		    // Turn Blending On
-		glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off		
-		glBegin(GL_QUADS); 
-			glColor4f(0.4f, 0.0f, 0.0f, 0.5f);
-			glVertex3f(x0, y0, z0);
-			glVertex3f(x1, y1, z1);
-			glVertex3f(x2, y2, z2);
-			glVertex3f(x3, y3, z3);
-		glEnd();
-		glDisable(GL_BLEND);		  
-		glEnable(GL_DEPTH_TEST); 
+	// 	glBegin(GL_QUADS); 
+	// 		glColor4f(0.4f, 0.0f, 0.0f, m_blend);
+	// 		glVertex3f(x0, y0, z0);
+	// 		glVertex3f(x1, y1, z1);
+	// 		glVertex3f(x2, y2, z2);
+	// 		glVertex3f(x3, y3, z3);
+	// 	glEnd();
 
-	}	
+	// 	glDisable(GL_BLEND);		  
+	// 	glEnable(GL_DEPTH_TEST); 
+
+
+	// }	
 
 
 
@@ -247,7 +255,7 @@ void CGlutWindow::renderFrame() {
 
 	// glDisable(GL_CLIP_PLANE0); 
 
-    
+ 
    
 	glutSwapBuffers();
 }
@@ -287,7 +295,7 @@ void CGlutWindow::keyEvent(unsigned char key,int x,int y)
 			break;
 		case 'i':
 			{
-				if(m_changeVolumeSide < 3)
+				if(m_changeVolumeSide < 4)
 					m_changeVolumeSide++;
 			}
 			break;	
@@ -309,9 +317,29 @@ void CGlutWindow::keyEvent(unsigned char key,int x,int y)
 				m_showGrid = !m_showGrid;
 			}
 			break;
+		case 'h':		
+		case 'H':
+			{
+				m_showGridFull = !m_showGridFull;
+			}
+			break;			
 		case 'c':
 			{
 				m_nInteractionMode = MOVE_CAMERA;
+			}
+			break;
+		case 'b':
+			{
+				if(m_blend>=0.0f)
+					m_blend-=0.1f;
+				printf("%f\n",m_blend );
+			}
+			break;
+		case 'B':
+			{
+				if(m_blend<=1.0f)
+					m_blend+=0.1f;
+				printf("%f\n",m_blend );
 			}
 			break;
 		case 'r':
@@ -330,6 +358,18 @@ void CGlutWindow::keyEvent(unsigned char key,int x,int y)
 				fNear-=0.1f;	
 			}
 			break;			
+		case 'f':
+		case 'F':
+			{
+				m_frame = !m_frame;
+			}
+			break;				
+		case 'p':
+		case 'P':
+			{
+				m_plane = !m_plane;
+			}
+			break;				
 		case 'q':
 		case 'Q':
 			exit(1);
@@ -525,9 +565,12 @@ void CGlutWindow::initializeGL()
 void CGlutWindow::initializeAppParameters()
 {
 	m_nMode = 0;
+	m_frame = true;
+	m_plane = true;
 	m_bDisplayTF = false;
 	m_showGrid = false;
 	m_showAxis = false;
+	m_blend = 1.0f;
 	m_changeVolumeSide = 0.0f;
 
 	m_pVertices[0] = CVector(-1.0,-1.0,-1.0, 1.0,  0.0, 0.0, 0.0);
@@ -676,24 +719,122 @@ void CGlutWindow::cgRenderGeometry() {
 	}
 
 	glEnd();
-	
-	glLineWidth(2.0);
-	glBegin(GL_LINES);
+
+	if(m_frame)
 	{
-#ifndef COLOR_CODE_EDGES
-		glColor3f(1.0,1.0,1.0);
-#endif
-		
-		for(int i = 0; i < 12; i++) {
-#ifdef COLOR_CODE_EDGES
-			glColor3dv(colors[i]);
-#endif
-			glVertex4dv(&(m_pVertices[m_pEdges[m_pEdgeList[nMaxIdx][i]].nV1])[0]);
-			glVertex4dv(&(m_pVertices[m_pEdges[m_pEdgeList[nMaxIdx][i]].nV2])[0]);
+		if(m_blend > 0.2)
+		{
+		glLineWidth(2.0);
+		glBegin(GL_LINES);
+		{
+			#ifndef COLOR_CODE_EDGES
+			glColor3f(0.0,0.0,0.0);
+			#endif
+			
+			for(int i = 0; i < 12; i++) {
+				#ifdef COLOR_CODE_EDGES
+				glColor3dv(colors[i]);
+				#endif
+				glVertex4dv(&(m_pVertices[m_pEdges[m_pEdgeList[nMaxIdx][i]].nV1])[0]);
+				glVertex4dv(&(m_pVertices[m_pEdges[m_pEdgeList[nMaxIdx][i]].nV2])[0]);
+			}
+
 		}
+		glEnd();
+		}
+   }
+
+	double z0,z1,z2,z3;	
+	double x0,x1,x2,x3;
+	double y0,y1,y2,y3;
+
+	if(m_drawPlane1 && m_plane)
+	{
+		x0 = 1.0f; y0 = 1.0f; z0 = -(m_planeInfo1.CZ*1.0f  + m_planeInfo1.BY*1.0f + m_planeInfo1.D )/(m_planeInfo1.AX*1.0f);
+		x1 = 1.0f; y1 =-1.0f; z1 = -(m_planeInfo1.CZ*1.0f  + m_planeInfo1.BY*-1.0f + m_planeInfo1.D)/(m_planeInfo1.AX*-1.0f);
+		x2 =-1.0f; y2 =-1.0f; z2 = -(m_planeInfo1.CZ*-1.0f + m_planeInfo1.BY*-1.0f + m_planeInfo1.D)/(m_planeInfo1.AX*-1.0f);
+		x3 =-1.0f; y3 = 1.0f; z3 = -(m_planeInfo1.CZ*-1.0f + m_planeInfo1.BY*1.0f + m_planeInfo1.D)/(m_planeInfo1.AX*1.0f);
+
+		 glEnable(GL_BLEND);		    // Turn Blending On
+		 glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off		
+
+
+
+		glLineWidth(0.01);
+		glBegin (GL_LINE_LOOP);
+			glVertex3f(x0, y0, z0);
+			glVertex3f(x1, y1, z1);
+			glVertex3f(x2, y2, z2);
+			glVertex3f(x3, y3, z3);
+		glEnd ();
+
+
+		// glLineWidth(5);
+		// glBegin(GL_LINES);
+		// 	glColor3f(1,0,0);
+		// 	glVertex3f(x0,y0,z0);
+		// 	glVertex3f(x0,y0,z0+0.3);
+			
+		// 	glVertex3f(x1, y1, z1);
+		// 	glVertex3f(x1, y1, z1+0.3);
+
+		// 	glVertex3f(x2, y2, z2);
+		// 	glVertex3f(x2, y2, z2+0.3);
+
+		// 	glVertex3f(x3, y3, z3);
+		// 	glVertex3f(x3, y3, z3+0.3);
+
+
+		// glEnd();
+		
+		glBegin(GL_QUADS); 
+			glColor4f(0.0f, 0.4f, 0.0f, m_blend);
+			glVertex3f(x0, y0, z0);
+			glVertex3f(x1, y1, z1);
+			glVertex3f(x2, y2, z2);
+			glVertex3f(x3, y3, z3);
+		glEnd();
+		
+		glEnable(GL_DEPTH_TEST);		    // Turn Blending On
+		glDisable(GL_BLEND);         // Turn Depth Testing Off	
 
 	}
-	glEnd();
+
+
+	if(m_drawPlane2)
+	{
+		x0 = 1.0f; y0 = 1.0f; z0 = -(m_planeInfo2.CZ*1.0f  + m_planeInfo2.BY*1.0f + m_planeInfo2.D )/m_planeInfo2.AX;
+		x1 = 1.0f; y1 =-1.0f; z1 = -(m_planeInfo2.CZ*1.0f  + m_planeInfo2.BY*-1.0f + m_planeInfo2.D)/m_planeInfo2.AX;
+		x2 =-1.0f; y2 =-1.0f; z2 = -(m_planeInfo2.CZ*-1.0f + m_planeInfo2.BY*-1.0f + m_planeInfo2.D)/m_planeInfo2.AX;
+		x3 =-1.0f; y3 = 1.0f; z3 = -(m_planeInfo2.CZ*-1.0f + m_planeInfo2.BY*1.0f + m_planeInfo2.D)/m_planeInfo2.AX;
+
+		glEnable(GL_BLEND);		    // Turn Blending On
+		glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off		
+		
+		glColor3f(0.0,0.0,0.0);
+		glLineWidth(0.01);
+		glBegin (GL_LINE_LOOP);
+			glVertex3f(x0, y0, z0);
+			glVertex3f(x1, y1, z1);
+			glVertex3f(x2, y2, z2);
+			glVertex3f(x3, y3, z3);
+		glEnd ();
+
+		// 	glColor4f(0.4f, 0.0f, 0.0f, m_blend);
+		// glBegin(GL_QUADS); 
+
+		// 	glVertex3f(x0, y0, z0);
+		// 	glVertex3f(x1, y1, z1);
+		// 	glVertex3f(x2, y2, z2);
+		// 	glVertex3f(x3, y3, z3);
+		// glEnd();
+
+		glDisable(GL_BLEND);		  
+		glEnable(GL_DEPTH_TEST); 
+
+
+	}	
+
 
 	if(m_drawPlane1)
 		m_nMode = 3;
@@ -980,13 +1121,153 @@ void CGlutWindow::chooseProfiles()
 
 void CGlutWindow::defaultGrid(float gridSize, float gridQuadSpacing)
 {
-	glBegin(GL_LINES);
-		for (GLfloat i = -gridSize; i <= gridSize; i += gridQuadSpacing) 
-		{
-			glVertex3f(i, 0, gridSize); glVertex3f(i, 0, -gridSize);
-			glVertex3f(gridSize, 0, i); glVertex3f(-gridSize, 0, i);
-		}
-	glEnd();
+	float gridSizeZ = gridSize;
+	// glBegin(GL_LINES);
+	// 	for (GLfloat i = -gridSize; i <= gridSize; i += gridQuadSpacing) 
+	// 	{
+	// 		glVertex3f(i, 0, gridSize); glVertex3f(i, 0, -gridSize);
+	// 		glVertex3f(gridSize, 0, i); glVertex3f(-gridSize, 0, i);
+	// 	}
+
+	// glEnd();
+
+
+
+	float xmin=-1.0, xmax=1.0, dx=0.2, x;
+	float ymin=-1.0, ymax=1.0, dy=0.2, y;
+
+	if(m_showGridFull)
+	{
+		glColor3f(0.0f,0.0f,0.0f);
+		glLineWidth(0.1);
+
+		glBegin(GL_LINES);
+
+			for(x=xmin; x<=xmax; x+=dx)
+			{
+				for(y=ymin; y<=ymax; y+=dy)
+				{
+					for(float z=ymin; z<=ymax; z+=dy)
+					{
+
+						glVertex3f(x, ymin, z);
+						glVertex3f(x, ymax, z);
+
+						glVertex3f(xmin, y, z);
+						glVertex3f(xmax, y, z);
+
+
+						glVertex3f(z,x, ymin);
+						glVertex3f(z,x, ymax);
+
+						glVertex3f(z,xmin, y);
+						glVertex3f(z,xmax, y);
+
+
+						glVertex3f(ymin,z,x);
+						glVertex3f(ymax,z,x);
+
+						glVertex3f(y,z,xmin);
+						glVertex3f(y,z,xmax);
+					}
+				}
+			}
+		glEnd();
+	}
+
+ 	if(m_showGrid)
+ 	{
+		glColor3f(1.0f,0.0f,0.0f);
+		glLineWidth(3.0);
+
+		glBegin(GL_LINES);
+
+
+			float subStep = 0.2;
+			float subMin= -0.8;
+			float subMax= -0.2;
+
+			for(x=subMin; x<=subMax; x+=subStep)
+			{
+				for(y=subMin; y<=subMax; y+=subStep)
+				{
+					for(float z=subMin; z<=subMax; z+=subStep)
+					{
+
+						glVertex3f(x, subMin, z);
+						glVertex3f(x, subMax, z);
+
+						glVertex3f(subMin, y, z);
+						glVertex3f(subMax, y, z);
+
+
+						glVertex3f(z,x, subMin);
+						glVertex3f(z,x, subMax);
+
+						glVertex3f(z,subMin, y);
+						glVertex3f(z,subMax, y);
+
+
+						glVertex3f(subMin,z,x);
+						glVertex3f(subMax,z,x);
+
+						glVertex3f(y,z,subMax);
+						glVertex3f(y,z,subMin);
+					}
+				}
+			}
+		glEnd();
+
+		// glColor3f(0.0f,1.0f,0.0f);
+		// glLineWidth(3.0);
+
+		// glBegin(GL_POLYGON);
+
+
+		// 	 subStep = 0.2;
+		// 	 subMin= -0.6;
+		// 	 subMax= -0.2;
+
+		// 	for(x=subMin; x<=subMax; x+=subStep)
+		// 	{
+		// 		for(y=subMin; y<=subMax; y+=subStep)
+		// 		{
+		// 			//for(float z=subMin; z<=subMax; z+=subStep)
+		// 			//{
+
+		// 				glVertex3f(x, subMin, -0.5);
+		// 				glVertex3f(x, subMax, -0.5);
+
+		// 				 glVertex3f(subMin, y, -0.5);
+		// 				 glVertex3f(subMax, y, -0.5);
+
+
+		// 				// glVertex3f(z,x, subMin);
+		// 				// glVertex3f(z,x, subMax);
+
+		// 				// glVertex3f(z,subMin, y);
+		// 				// glVertex3f(z,subMax, y);
+
+
+		// 				// glVertex3f(subMin,z,x);
+		// 				// glVertex3f(subMax,z,x);
+
+		// 				// glVertex3f(y,z,subMax);
+		// 				// glVertex3f(y,z,subMin);
+		// 			//}
+		// 		}
+		// 	}
+		// glEnd();
+
+
+
+	}
+
+
+
+
+
+
 
 }
 
