@@ -62,6 +62,9 @@ protected:
 	bool     m_bDisplayTF;
 	bool	 m_drawPlane1;
 	bool	 m_drawPlane2;
+	bool	 m_frame;
+	bool     m_plane;
+	float 	 m_blend;
 	double	 m_changeVolumeSide;
 	GLuint   m_pTextureIds[3];
 	int      m_nNumSlices;

@@ -4,12 +4,92 @@
 		"selected_items":
 		[
 			[
-				"c_a",
-				"c_argv"
+				"gri",
+				"gridSize"
+			],
+			[
+				"grid",
+				"gridSizeZ"
+			],
+			[
+				"glCol",
+				"glColor3f"
+			],
+			[
+				"gl",
+				"glVertex3f"
 			],
 			[
 				"GL",
-				"GLfloat"
+				"GL_LINES"
+			],
+			[
+				"ar",
+				"c_argc"
+			],
+			[
+				"m_dra",
+				"m_drawPlane2"
+			],
+			[
+				"c_ar",
+				"c_argv"
+			],
+			[
+				"cha",
+				"m_changeVolumeSide"
+			],
+			[
+				"value",
+				"value_in"
+			],
+			[
+				"do",
+				"double"
+			],
+			[
+				"m_Pl",
+				"m_planeInfo"
+			],
+			[
+				"m_pl",
+				"m_planeInfo"
+			],
+			[
+				"c_",
+				"c_argv"
+			],
+			[
+				"p",
+				"plano"
+			],
+			[
+				"init",
+				"initializeAll"
+			],
+			[
+				"GL_D",
+				"GL_DEPTH_TEST"
+			],
+			[
+				"GL_",
+				"GL_BLEND"
+			],
+			[
+				"axis",
+				"axisLineWidth"
+			],
+			[
+				"defa",
+				"defaultAxis"
+			],
+			[
+				"glC",
+				"glColor3f"
+			],
+			[
+				"CG",
+				"CGlutWindow"
 			],
 			[
 				"ini",
@@ -22,10 +102,6 @@
 			[
 				"c_arg",
 				"c_argv"
-			],
-			[
-				"c_ar",
-				"c_argc"
 			],
 			[
 				"im",
@@ -120,19 +196,11 @@
 				"golsDiff"
 			],
 			[
-				"ar",
-				"arqSaida"
-			],
-			[
 				"ti",
 				"timeMandante"
 			],
 			[
 				"g",
-				"golsT2"
-			],
-			[
-				"gl",
 				"golsT2"
 			],
 			[
@@ -336,10 +404,6 @@
 				"s_sliceF"
 			],
 			[
-				"c_",
-				"c_sliceRange"
-			],
-			[
 				"s_",
 				"s_height"
 			],
@@ -450,54 +514,6 @@
 			[
 				"Slice",
 				"sliceRank"
-			],
-			[
-				"a",
-				"algorithm"
-			],
-			[
-				"timeS",
-				"timeSurf"
-			],
-			[
-				"algori",
-				"algorithm"
-			],
-			[
-				"mss",
-				"mssimV"
-			],
-			[
-				"o",
-				"opencv2"
-			],
-			[
-				"inc",
-				"include"
-			],
-			[
-				"ch",
-				"char"
-			],
-			[
-				"dist",
-				"distValues"
-			],
-			[
-				"max",
-				"max_dist"
-			],
-			[
-				"min",
-				"min_dist"
-			],
-			[
-				"fo",
-				"font-weight"
-			],
-			[
-				"font",
-				"font-style"
 			]
 		]
 	},
@@ -515,7 +531,7 @@
 			"file": "core.cpp",
 			"settings":
 			{
-				"buffer_size": 1809,
+				"buffer_size": 2839,
 				"line_ending": "Unix",
 				"name": "#include \"core.h\""
 			}
@@ -556,32 +572,48 @@
 			"file": "GlutWindow.h",
 			"settings":
 			{
-				"buffer_size": 2085,
+				"buffer_size": 2356,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "TransferFunction.cpp",
+			"file": "/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/Computacão Gráfica/trab2/ogl_fps_controls.cpp",
 			"settings":
 			{
-				"buffer_size": 5812,
+				"buffer_size": 13651,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Makefile",
-			"settings":
-			{
-				"buffer_size": 476,
-				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "GlutWindow.cpp",
 			"settings":
 			{
-				"buffer_size": 24345,
+				"buffer_size": 28985,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "mathutil/CMatrix.h",
+			"settings":
+			{
+				"buffer_size": 3308,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "shader/vp_drawPlane.cg",
+			"settings":
+			{
+				"buffer_size": 544,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "shader/fp_drawPlane.cg",
+			"settings":
+			{
+				"buffer_size": 785,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -598,30 +630,6 @@
 			{
 				"buffer_size": 231,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "shader/demo_vert.cg",
-			"settings":
-			{
-				"buffer_size": 375,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "shader/fp_emission_absorption.cg",
-			"settings":
-			{
-				"buffer_size": 400,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "shader/vp_simple.cg",
-			"settings":
-			{
-				"buffer_size": 546,
-				"line_ending": "Windows"
 			}
 		},
 		{
@@ -689,14 +697,34 @@
 	},
 	"file_history":
 	[
-		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/utils.h",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/Fundamentos Matemáticos para CG/trabalho final/PointCloud/models/cat.txt",
+		"/home/jeronimo/Documents/open_gl_tutorial/tutorial01/Makefile",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/mathutil/CVector.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/mathutil/CVector.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/my_libs/Handle3DDataset/src/handle3ddataset.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/2d_3d_comparison/src/main.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/2d_3d_comparison/bin/runTests_all_128.sh",
+		"/home/jeronimo/Dropbox/UFRGS/Disciplinas/Computacão Gráfica/trab2/ogl_fps_controls.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/shader/fp_drawPlane.cg",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/shader/vp_simple.cg",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/shader/fp_emission_absorption.cg",
+		"/home/jeronimo/.cache/.fr-YXYeyV/lesson32/lesson32.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/shader/fp_emis_abs_gradlightPhong.cg",
+		"/home/jeronimo/Documents/open_gl_tutorial/tutorial01/sample.cpp",
+		"/home/jeronimo/Documents/open_gl_tutorial/tutorial01/tutorial01.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/Makefile",
+		"/home/jeronimo/.cache/.fr-zJhXgZ/livAr/ImageTargets/simpleButton.m",
+		"/home/jeronimo/.cache/.fr-Tgw6aB/livAr/ImageTargets/Shaders/Shader.vsh",
+		"/home/jeronimo/.cache/.fr-kHwF9i/livAr/ImageTargets/Shaders/Shader.fsh",
+		"/home/jeronimo/Documents/cg_test/Lesson47/Cg/Wave.cg",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/ArcBall.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/ArcBall.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/TransferFunction.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/shader/demo_vert.cg",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/Fundamentos Matemáticos para CG/trabalho final/PointCloud/models/cat.txt",
 		"/run/user/1000/gvfs/sftp:host=sutherland,port=222,user=jggrandi/home/pub/modelos/Pamplona - Dissertação/rp.def",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/TransferFunction.h",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/Trapez.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/Trapez.h",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Pesquisa/Devel/volumeRendering/src/mathutil/CVector.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/bin/runSingleTest.sh",
 		"/mnt/truecrypt1/Dropbox/compartilhadaFrancis/datasets_for_tests/dataset_info.txt",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/logdata.h",
@@ -796,27 +824,7 @@
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata.h",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main2.h",
-		"/home/jeronimo/.cache/.fr-PN5Wqx/aircrack-ng-1.2-beta1/src/version.h",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/systemmessages.cpp",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/qualityassessment.cpp",
-		"/home/jeronimo/Dropbox/eclipse_workspace/aulaspraticas_sources/mandel.c",
-		"/home/jeronimo/.cache/.fr-2eCfGu/conky-1.9.0/data/conky.conf",
-		"/home/jeronimo/.config/sublime-text-2/Packages/User/Xmo_Make.sublime-build",
-		"/home/jeronimo/.config/sublime-text-2/Packages/C++/C++.sublime-build",
-		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/include/Texture.h",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/Cronograma[Jun-Ago].txt",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/runSingleTest.sh",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/imageinfo.h",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata.cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata.h",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/systemmessages.h",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main2.cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main.cpp",
-		"/run/media/jeronimo/Data/Projetos/Devel 2009/SmartContour/SmartContour/ContourArray.h",
-		"/run/media/jeronimo/Data/Projetos/Devel 2009/SmartContour/SmartContour/ContourArray.cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/systemmessages.cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Missao_exterior/draft.txt",
-		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Missao_exterior/draft.txt"
+		"/home/jeronimo/.cache/.fr-PN5Wqx/aircrack-ng-1.2-beta1/src/version.h"
 	],
 	"find":
 	{
@@ -834,13 +842,91 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"AX",
-			";\n",
-			"-0.5486",
-			"0.8360",
+			"gridSize",
+			"0",
+			"glBindBuffe",
+			"glBindBuffer",
+			"load",
+			"m_frame",
+			"frame",
+			"m_nMode",
+			"m_changeVolumeSide",
+			"1",
+			"bucky",
+			"m_pEdgeList",
+			"renderGeometry",
+			"m_pVertices",
+			"m_pEdgeList",
+			"m_ble",
+			"m_blend",
+			"m_blen",
+			"CZ",
+			"m_blend",
+			"m_blen",
+			"m_nMode",
+			"m_planeInfo",
+			"m_drawPlane",
+			"m_planeInfo1",
+			"m_drawPlane",
+			"m_planeInfo",
+			"printf",
+			"prinf",
+			"depth",
+			"glClear",
+			"viewVec",
+			"m_nMode",
+			"case",
+			"m_nMode",
+			"0",
+			"float",
+			"0",
+			"x",
+			"0",
+			"float",
+			"pro",
+			"dot",
+			"float",
+			"m_planeInfo",
+			"CZ",
+			"0.3609",
+			"0.8370",
 			"-0.5406",
-			"-0.5486",
-			"0.8360",
+			"5406",
+			" -0.5406",
+			"-0.5406",
+			"vecStart",
+			"CVector",
+			"m_nMode",
+			"GLcLEAR",
+			"0.0",
+			",",
+			"m",
+			"CG_GL_MODELVIEW_PROJECTION_MATRIX",
+			"viewVec",
+			"m_pVertexPrograms",
+			"m_nMode",
+			"viewVec",
+			"60",
+			"86",
+			"2.0f",
+			"0f",
+			"3.0f",
+			"TAM",
+			"nPl1.z",
+			"nPl1.y",
+			"nPl1.x",
+			"y",
+			"defaultAxis",
+			"10",
+			"Grid",
+			"showgr",
+			"m_bDisplayTF",
+			"2.5",
+			"eqn",
+			"eqn1",
+			"m_pTextureIds",
+			"m_nMode",
+			"cg",
 			"eqn1",
 			"demo",
 			"renderGeometry",
@@ -883,85 +969,7 @@
 			"m_pTransferFunction",
 			"m_bDisplayTF",
 			"transf",
-			"trans",
-			"demo",
-			"cgIsProgram",
-			"s_vertexProfile",
-			"cgGetError",
-			"vertProfile",
-			"context",
-			"m_pTransferFunction",
-			"similarityCheck",
-			"create",
-			"renderGeometry",
-			"CGlutCgWindow",
-			"CGlutCgWindow::",
-			"CGlutCgWindow::vertProfile",
-			"CGlutCgWindow::",
-			"CGlutCgWindow",
-			"load",
-			"initializeC",
-			"chooseProfiles",
-			"\\\\",
-			"getInstance()->",
-			"static",
-			";\n",
-			"inline ",
-			"friend",
-			"c_pMainWindow",
-			"g_pMainWindow",
-			"c_handleData",
-			"handleData",
-			"DATAINFO",
-			"light",
-			"resize",
-			"g_pMainWindow.resize",
-			".",
-			"initializeGL",
-			"pose",
-			"virtual",
-			"sr",
-			".",
-			"jogos[index]",
-			"jogos",
-			"arq",
-			"cont_ast",
-			"MAX_NC_OPEN",
-			"miicv_create",
-			"i_img2",
-			"i_img1",
-			";\n",
-			" [stack",
-			"[",
-			"stack",
-			" [stack",
-			"[",
-			"opt",
-			"argc",
-			"getVersion",
-			"argc",
-			"main",
-			"operator",
-			"img2",
-			"img1",
-			"img2",
-			"img1",
-			"img",
-			"k",
-			"SetImage",
-			"SetSubImage",
-			"3d",
-			"LoadData",
-			"LOAD_DATA",
-			"LoadData",
-			"/*",
-			"LoadData",
-			"plano",
-			"pep",
-			"LoadImage",
-			"LoadData",
-			"OnDestroy",
-			"\n	"
+			"trans"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -979,7 +987,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -994,8 +1002,8 @@
 						"selection":
 						[
 							[
-								87,
-								87
+								618,
+								618
 							]
 						],
 						"settings":
@@ -1014,15 +1022,15 @@
 					"file": "core.cpp",
 					"settings":
 					{
-						"buffer_size": 1809,
+						"buffer_size": 2839,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								699,
-								699
+								996,
+								996
 							]
 						],
 						"settings":
@@ -1032,7 +1040,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 662.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1049,8 +1057,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								87,
+								87
 							]
 						],
 						"settings":
@@ -1104,8 +1112,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								494,
+								494
 							]
 						],
 						"settings":
@@ -1113,7 +1121,7 @@
 							"syntax": "Packages/C++/C++.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 225.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1130,8 +1138,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								160,
+								160
 							]
 						],
 						"settings":
@@ -1149,15 +1157,15 @@
 					"file": "GlutWindow.h",
 					"settings":
 					{
-						"buffer_size": 2085,
+						"buffer_size": 2356,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								350,
-								350
+								493,
+								493
 							]
 						],
 						"settings":
@@ -1166,60 +1174,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "TransferFunction.cpp",
-					"settings":
-					{
-						"buffer_size": 5812,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "Makefile",
-					"settings":
-					{
-						"buffer_size": 476,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Makefile/Makefile.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 122.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1227,23 +1182,23 @@
 			]
 		},
 		{
-			"selected": 6,
+			"selected": 1,
 			"sheets":
 			[
 				{
-					"buffer": 9,
-					"file": "GlutWindow.cpp",
+					"buffer": 7,
+					"file": "/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/Computacão Gráfica/trab2/ogl_fps_controls.cpp",
 					"settings":
 					{
-						"buffer_size": 24345,
+						"buffer_size": 13651,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								512,
-								512
+								1455,
+								1455
 							]
 						],
 						"settings":
@@ -1252,13 +1207,123 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 155.0,
+						"translation.y": 405.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "GlutWindow.cpp",
+					"settings":
+					{
+						"buffer_size": 28985,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								28577,
+								28577
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 15604.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "mathutil/CMatrix.h",
+					"settings":
+					{
+						"buffer_size": 3308,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2747,
+								2747
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2610.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 10,
+					"file": "shader/vp_drawPlane.cg",
+					"settings":
+					{
+						"buffer_size": 544,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								462,
+								462
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "shader/fp_drawPlane.cg",
+					"settings":
+					{
+						"buffer_size": 785,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								721,
+								721
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
 					"file": "shader/fp_showGradient.cg",
 					"settings":
 					{
@@ -1268,6 +1333,10 @@
 						},
 						"selection":
 						[
+							[
+								87,
+								87
+							],
 							[
 								337,
 								337
@@ -1285,7 +1354,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 13,
 					"file": "shader/demo_frag.cg",
 					"settings":
 					{
@@ -1311,88 +1380,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
-					"file": "shader/demo_vert.cg",
-					"settings":
-					{
-						"buffer_size": 375,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "shader/fp_emission_absorption.cg",
-					"settings":
-					{
-						"buffer_size": 400,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
 					"buffer": 14,
-					"file": "shader/vp_simple.cg",
-					"settings":
-					{
-						"buffer_size": 546,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 15,
 					"file": "main.cpp",
 					"settings":
 					{
@@ -1403,8 +1391,12 @@
 						"selection":
 						[
 							[
-								169,
-								169
+								0,
+								0
+							],
+							[
+								129,
+								129
 							]
 						],
 						"settings":
@@ -1419,7 +1411,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 15,
 					"file": "utils.h",
 					"settings":
 					{
@@ -1430,8 +1422,8 @@
 						"selection":
 						[
 							[
-								872,
-								872
+								412,
+								412
 							]
 						],
 						"settings":
@@ -1441,7 +1433,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 225.0,
+						"translation.y": 45.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1516,6 +1508,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 280.0,
+	"side_bar_width": 176.0,
 	"status_bar_visible": true
 }
