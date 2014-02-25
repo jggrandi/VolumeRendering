@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"GL",
+				"GL_BLEND"
+			],
+			[
 				"gri",
 				"gridSize"
 			],
@@ -18,10 +22,6 @@
 			[
 				"gl",
 				"glVertex3f"
-			],
-			[
-				"GL",
-				"GL_LINES"
 			],
 			[
 				"ar",
@@ -572,7 +572,7 @@
 			"file": "GlutWindow.h",
 			"settings":
 			{
-				"buffer_size": 2356,
+				"buffer_size": 2389,
 				"line_ending": "Windows"
 			}
 		},
@@ -588,7 +588,7 @@
 			"file": "GlutWindow.cpp",
 			"settings":
 			{
-				"buffer_size": 28985,
+				"buffer_size": 30008,
 				"line_ending": "Windows"
 			}
 		},
@@ -612,7 +612,7 @@
 			"file": "shader/fp_drawPlane.cg",
 			"settings":
 			{
-				"buffer_size": 785,
+				"buffer_size": 789,
 				"line_ending": "Unix"
 			}
 		},
@@ -842,6 +842,45 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"zoom",
+			"130",
+			"m_dZoom",
+			"planes",
+			"AX",
+			"color",
+			"test",
+			"color+",
+			"color+0",
+			"color+",
+			"color",
+			"planes",
+			"defaultAxis",
+			"m_blend",
+			"window",
+			"viewpo",
+			"depth",
+			"deph",
+			"glBlendFunc",
+			"0.1",
+			"0.5",
+			"1.0",
+			"0.1",
+			"1.0",
+			"0f",
+			"1.0f",
+			"1.0",
+			"color",
+			"0",
+			"[",
+			"m_planeInfo1",
+			"planes",
+			"23",
+			"10",
+			"0",
+			"m_planeInfo1",
+			"0",
+			"m_planeInfo1",
+			"render",
 			"gridSize",
 			"0",
 			"glBindBuffe",
@@ -930,46 +969,7 @@
 			"eqn1",
 			"demo",
 			"renderGeometry",
-			"renderge",
-			"1.0f",
-			"printf",
-			"char",
-			"unsigned short",
-			"img1Info",
-			"loadTextures",
-			"argv",
-			"m_pTextureIds",
-			"GL_TEXTURE_3D",
-			"glEnable",
-			"GL_TEXTURE_3D",
-			"printf",
-			"getInstance()->",
-			"printf",
-			"CalculateFPS",
-			"UpdateTimeCounter",
-			"time",
-			"m_currentVolume",
-			"UpdateCurrentSlice",
-			"MoveCurrentSliceForward",
-			"SLICE_FORWARD_ID",
-			"3d",
-			"clamp",
-			"DrawSlices",
-			"VIEW_DISTANCE_MIN",
-			"fru",
-			"m_pTextureIds",
-			"pVolume",
-			"fNear",
-			"m_nNumSlices",
-			"initializeGL",
-			"glTexImage3D",
-			"char",
-			"load",
-			"char",
-			"m_pTransferFunction",
-			"m_bDisplayTF",
-			"transf",
-			"trans"
+			"renderge"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1029,8 +1029,8 @@
 						"selection":
 						[
 							[
-								996,
-								996
+								725,
+								725
 							]
 						],
 						"settings":
@@ -1040,7 +1040,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 662.0,
+						"translation.y": 90.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1157,15 +1157,15 @@
 					"file": "GlutWindow.h",
 					"settings":
 					{
-						"buffer_size": 2356,
+						"buffer_size": 2389,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								493,
-								493
+								1095,
+								1095
 							]
 						],
 						"settings":
@@ -1174,7 +1174,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 122.0,
+						"translation.y": 702.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1217,15 +1217,15 @@
 					"file": "GlutWindow.cpp",
 					"settings":
 					{
-						"buffer_size": 28985,
+						"buffer_size": 30008,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								28577,
-								28577
+								2180,
+								2180
 							]
 						],
 						"settings":
@@ -1234,7 +1234,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 15604.0,
+						"translation.y": 12333.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1300,15 +1300,15 @@
 					"file": "shader/fp_drawPlane.cg",
 					"settings":
 					{
-						"buffer_size": 785,
+						"buffer_size": 789,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								721,
-								721
+								443,
+								443
 							]
 						],
 						"settings":
@@ -1422,8 +1422,8 @@
 						"selection":
 						[
 							[
-								412,
-								412
+								836,
+								836
 							]
 						],
 						"settings":

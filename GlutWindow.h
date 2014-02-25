@@ -55,6 +55,7 @@ protected:
     DATAINFO m_datasetInfo;
     PLANE_EQ m_planeInfo1;
     PLANE_EQ m_planeInfo2;
+    PLANE_EQ planeEquations[32];
 
 	int      m_nMode;
 	bool	 m_showGrid; 

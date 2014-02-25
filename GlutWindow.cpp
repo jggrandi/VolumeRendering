@@ -6,14 +6,17 @@
 #include <GL/glut.h>
 #include <sys/time.h>
 
+#include <fstream>
 
 #define DEG2RAD(a) ((a)/57.295)
 
 #define ZOOM_MIN (0.05)
-#define ZOOM_MAX (10.0)
+#define ZOOM_MAX (200.0)
 //#define DISABLE_DRAGGING
 
+#define PLANES 4
 
+using namespace std;
 
 
 static void handleCgError() 
@@ -63,6 +66,18 @@ CGlutWindow::~CGlutWindow(void)
 void CGlutWindow::initializeAll()
 {
 	
+	ifstream ifs;
+
+	ifs.open("planeEquations.txt");
+
+	for(int i=0; i<PLANES ;i++)
+	{
+		ifs >> planeEquations[i].AX >> planeEquations[i].BY >> planeEquations[i].CZ >> planeEquations[i].D;
+		printf("%f,%f,%f,%f\n", planeEquations[i].AX, planeEquations[i].BY, planeEquations[i].CZ,planeEquations[i].D);
+	}
+
+	ifs.close();
+
 	s_fragmentProfile = s_vertexProfile = CG_PROFILE_UNKNOWN;
 
 	m_pCameraArcball = new CArcBall();
@@ -70,7 +85,8 @@ void CGlutWindow::initializeAll()
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_ALPHA);
 	//glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGBA | GLUT_ALPHA);
-	glutInitWindowSize (384,288); 
+	//glutInitWindowSize (384,288); 
+	glutInitWindowSize (1280,1024); 
 	glutInitWindowPosition (0, 0);
 	glutCreateWindow ("Volume Rendering");
 
@@ -95,6 +111,8 @@ void CGlutWindow::initializeAll()
 	initializeAppParameters();
 	initializeGL();
 	initializeCg();
+
+
 
 }
 
@@ -160,7 +178,7 @@ void CGlutWindow::renderFrame() {
 		defaultGrid(2.5f,0.5f);
 	}
 	if(m_showAxis)
-		defaultAxis(3.0f,5.0f);	
+		defaultAxis(3.0f,2.0f);	
 
 	double z0,z1,z2,z3;	
 	double x0,x1,x2,x3;
@@ -551,8 +569,8 @@ void CGlutWindow::initializeGL()
     /* Select Color and Projection*/
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
-	glBlendFunc (GL_SRC_ALPHA, GL_ONE);
-    //glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glBlendFunc (GL_SRC_ALPHA, GL_ONE);
+    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //glColor3f(1.0, 1.0, 1.0);
     glShadeModel(GL_SMOOTH);	
 }
@@ -645,6 +663,89 @@ void CGlutWindow::renderGeometry() {
 }
 
 void CGlutWindow::cgRenderGeometry() {
+
+	double z0,z1,z2,z3;	
+	double x0,x1,x2,x3;
+	double y0,y1,y2,y3;
+
+
+	glEnable(GL_BLEND);		    // Turn Blending On
+
+//		glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off	
+
+	if(m_drawPlane1 && m_plane)
+	{
+float color=0;
+for(int pn =0; pn<PLANES; pn++)
+{
+
+		x0 = 1.0f; y0 = 1.0f; z0 = -(planeEquations[pn].CZ*1.0f  + planeEquations[pn].BY*1.0f + planeEquations[pn].D )/(planeEquations[pn].AX*1.0);
+		x1 = 1.0f; y1 =-1.0f; z1 = -(planeEquations[pn].CZ*1.0f  + planeEquations[pn].BY*-1.0f + planeEquations[pn].D)/(planeEquations[pn].AX*-1.0);
+		x2 =-1.0f; y2 =-1.0f; z2 = -(planeEquations[pn].CZ*-1.0f + planeEquations[pn].BY*-1.0f + planeEquations[pn].D)/(planeEquations[pn].AX*-1.0);
+		x3 =-1.0f; y3 = 1.0f; z3 = -(planeEquations[pn].CZ*-1.0f + planeEquations[pn].BY*1.0f + planeEquations[pn].D)/(planeEquations[pn].AX*1.0);
+
+	
+
+	
+		glLineWidth(0.5);
+
+		
+		glBegin (GL_LINE_LOOP);
+			glColor4f(0.0f, 0.0f, 0.0f, m_blend);
+			glVertex3f(x0, y0, z0);
+			glVertex3f(x1, y1, z1);
+			glVertex3f(x2, y2, z2);
+			glVertex3f(x3, y3, z3);
+		glEnd ();
+
+
+		// glLineWidth(5);
+		// glBegin(GL_LINES);
+		// 	glColor3f(1,0,0);
+		// 	glVertex3f(x0,y0,z0);
+		// 	glVertex3f(x0,y0,z0+0.3);
+			
+		// 	glVertex3f(x1, y1, z1);
+		// 	glVertex3f(x1, y1, z1+0.3);
+
+		// 	glVertex3f(x2, y2, z2);
+		// 	glVertex3f(x2, y2, z2+0.3);
+
+		// 	glVertex3f(x3, y3, z3);
+		// 	glVertex3f(x3, y3, z3+0.3);
+
+
+		// glEnd();
+		//printf("%f\n", (float)pn/32 );
+	
+		glBegin(GL_QUADS); 
+			if(pn==0)
+				glColor4f(0, 0.5, 0.5, m_blend);
+			else if (pn==1)
+				glColor4f(0.5, 0, 0, m_blend);
+			else if (pn==2)
+				glColor4f(0.5, 0.5, 0.0f, m_blend);
+			else if (pn==3)
+				glColor4f(0.0f, 0.5, 0, m_blend);
+			else if (pn==4)
+				glColor4f(0.5, 0, 0.5, m_blend);
+			else if (pn==5)
+				glColor4f(0.5, 0.5, 0.5, m_blend);
+
+			glVertex3f(x0, y0, z0);
+			glVertex3f(x1, y1, z1);
+			glVertex3f(x2, y2, z2);
+			glVertex3f(x3, y3, z3);
+		glEnd();
+		
+
+		//glPopMatrix();
+	}
+}
+
+
+	
+
 	int pViewport[4];
 	glGetIntegerv(GL_VIEWPORT,pViewport);
 
@@ -736,60 +837,10 @@ void CGlutWindow::cgRenderGeometry() {
 		glEnd();
    }
 
-	double z0,z1,z2,z3;	
-	double x0,x1,x2,x3;
-	double y0,y1,y2,y3;
+	//	glEnable(GL_DEPTH_TEST);
+		glDisable(GL_BLEND);
 
-	if(m_drawPlane1 && m_plane)
-	{
-		x0 = 1.0f; y0 = 1.0f; z0 = -(m_planeInfo1.CZ*1.0f  + m_planeInfo1.BY*1.0f + m_planeInfo1.D )/(m_planeInfo1.AX*1.0f);
-		x1 = 1.0f; y1 =-1.0f; z1 = -(m_planeInfo1.CZ*1.0f  + m_planeInfo1.BY*-1.0f + m_planeInfo1.D)/(m_planeInfo1.AX*-1.0f);
-		x2 =-1.0f; y2 =-1.0f; z2 = -(m_planeInfo1.CZ*-1.0f + m_planeInfo1.BY*-1.0f + m_planeInfo1.D)/(m_planeInfo1.AX*-1.0f);
-		x3 =-1.0f; y3 = 1.0f; z3 = -(m_planeInfo1.CZ*-1.0f + m_planeInfo1.BY*1.0f + m_planeInfo1.D)/(m_planeInfo1.AX*1.0f);
-
-		// glEnable(GL_BLEND);		    // Turn Blending On
-		// glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off		
-
-
-
-		glLineWidth(0.01);
-		glBegin (GL_LINE_LOOP);
-			glVertex3f(x0, y0, z0);
-			glVertex3f(x1, y1, z1);
-			glVertex3f(x2, y2, z2);
-			glVertex3f(x3, y3, z3);
-		glEnd ();
-
-
-		glLineWidth(5);
-		glBegin(GL_LINES);
-			glColor3f(1,0,0);
-			glVertex3f(x0,y0,z0);
-			glVertex3f(x0,y0,z0+0.3);
-			
-			glVertex3f(x1, y1, z1);
-			glVertex3f(x1, y1, z1+0.3);
-
-			glVertex3f(x2, y2, z2);
-			glVertex3f(x2, y2, z2+0.3);
-
-			glVertex3f(x3, y3, z3);
-			glVertex3f(x3, y3, z3+0.3);
-
-
-		glEnd();
-		// glBegin(GL_QUADS); 
-		// 	glColor4f(0.0f, 0.4f, 0.0f, m_blend);
-		// 	glVertex3f(x0, y0, z0);
-		// 	glVertex3f(x1, y1, z1);
-		// 	glVertex3f(x2, y2, z2);
-		// 	glVertex3f(x3, y3, z3);
-		// glEnd();
-		
-	}
-
-
-
+	
 	if(m_drawPlane1)
 		m_nMode = 3;
 
