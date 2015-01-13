@@ -14,7 +14,7 @@
 #define ZOOM_MAX (200.0)
 //#define DISABLE_DRAGGING
 
-#define PLANES 4
+
 
 using namespace std;
 
@@ -25,13 +25,17 @@ static void handleCgError()
    	exit(1);
 }
 
-CGlutWindow::CGlutWindow(){};
+CGlutWindow::CGlutWindow()
+{
+	PLANES=32;
+};
 
 CGlutWindow::CGlutWindow(DATAINFO dInfo)
 {
 	m_datasetInfo = dInfo;
 	m_drawPlane1   = false;
 	m_drawPlane2   = false;
+		PLANES=32;
 	initializeAll();
 }
 
@@ -41,6 +45,7 @@ CGlutWindow::CGlutWindow(DATAINFO dInfo, PLANE_EQ dPlane)
 	m_planeInfo1   = dPlane;
 	m_drawPlane1   = true;
 	m_drawPlane2   = false;
+		PLANES=32;
 	initializeAll();
 }
 
@@ -52,6 +57,7 @@ CGlutWindow::CGlutWindow(DATAINFO dInfo, PLANE_EQ dPlane1, PLANE_EQ dPlane2)
 	m_planeInfo2   = dPlane2;
 	m_drawPlane1   = true;
 	m_drawPlane2   = true;
+		PLANES=32;
 	initializeAll();
 
 }
@@ -383,6 +389,16 @@ void CGlutWindow::keyEvent(unsigned char key,int x,int y)
 				m_plane = !m_plane;
 			}
 			break;				
+		case 'x':
+			{
+				PLANES--;
+			}
+			break;	
+		case 'X':
+			{
+				PLANES++;
+			}
+			break;	
 		case 'q':
 		case 'Q':
 			exit(1);
@@ -569,8 +585,8 @@ void CGlutWindow::initializeGL()
     /* Select Color and Projection*/
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
-	//glBlendFunc (GL_SRC_ALPHA, GL_ONE);
-    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFunc (GL_SRC_ALPHA, GL_ONE);
+    //glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //glColor3f(1.0, 1.0, 1.0);
     glShadeModel(GL_SMOOTH);	
 }
@@ -671,13 +687,15 @@ void CGlutWindow::cgRenderGeometry() {
 
 	glEnable(GL_BLEND);		    // Turn Blending On
 
-//		glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off	
+		glDisable(GL_DEPTH_TEST);         // Turn Depth Testing Off	
 
 	if(m_drawPlane1 && m_plane)
 	{
 float color=0;
-for(int pn =0; pn<PLANES; pn++)
+if(PLANES > 0)
 {
+	for(int pn =0; pn<PLANES; pn++)
+	{
 
 		x0 = 1.0f; y0 = 1.0f; z0 = -(planeEquations[pn].CZ*1.0f  + planeEquations[pn].BY*1.0f + planeEquations[pn].D )/(planeEquations[pn].AX*1.0);
 		x1 = 1.0f; y1 =-1.0f; z1 = -(planeEquations[pn].CZ*1.0f  + planeEquations[pn].BY*-1.0f + planeEquations[pn].D)/(planeEquations[pn].AX*-1.0);
@@ -719,18 +737,19 @@ for(int pn =0; pn<PLANES; pn++)
 		//printf("%f\n", (float)pn/32 );
 	
 		glBegin(GL_QUADS); 
-			if(pn==0)
-				glColor4f(0, 0.5, 0.5, m_blend);
-			else if (pn==1)
-				glColor4f(0.5, 0, 0, m_blend);
-			else if (pn==2)
-				glColor4f(0.5, 0.5, 0.0f, m_blend);
-			else if (pn==3)
-				glColor4f(0.0f, 0.5, 0, m_blend);
-			else if (pn==4)
-				glColor4f(0.5, 0, 0.5, m_blend);
-			else if (pn==5)
-				glColor4f(0.5, 0.5, 0.5, m_blend);
+			glColor4f(0, 0.5, 0, m_blend);
+			// if(pn==0)
+			// 	glColor4f(0, 0.5, 0.5, m_blend);
+			// else if (pn==1)
+			// 	glColor4f(0.5, 0, 0, m_blend);
+			// else if (pn==2)
+			// 	glColor4f(0.5, 0.5, 0.0f, m_blend);
+			// else if (pn==3)
+			// 	glColor4f(0.0f, 0.5, 0, m_blend);
+			// else if (pn==4)
+			// 	glColor4f(0.5, 0, 0.5, m_blend);
+			// else if (pn==5)
+			// 	glColor4f(0.5, 0.5, 0.5, m_blend);
 
 			glVertex3f(x0, y0, z0);
 			glVertex3f(x1, y1, z1);
@@ -742,8 +761,10 @@ for(int pn =0; pn<PLANES; pn++)
 		//glPopMatrix();
 	}
 }
+}
 
-
+		glEnable(GL_DEPTH_TEST);
+		glDisable(GL_BLEND);
 	
 
 	int pViewport[4];
@@ -837,8 +858,7 @@ for(int pn =0; pn<PLANES; pn++)
 		glEnd();
    }
 
-	//	glEnable(GL_DEPTH_TEST);
-		glDisable(GL_BLEND);
+
 
 	
 	if(m_drawPlane1)
